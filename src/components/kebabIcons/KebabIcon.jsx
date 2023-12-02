@@ -19,8 +19,8 @@ export default function KebabIcon() {
                 (<li className='m-3' key={props.id}><Infobox id={props.id} iconRef={props.imgRef} information={props.information} subInformation={props.subInformation} isVisible={props.isVisible} width={props.width} height={props.height}/></li>)
               )}
             </ul>
-            <Button className="w-full h-10 bg-blue-500 rounded" onClickButton={console.log("hej")} >
-              <span className='text-sm '>REQUEST A CALL</span>
+            <Button className="w-full h-10 text-sm text-black bg-transparent border border-gray-700 rounded hover:bg-blue-600 hover:border-none hover:text-white" onClickButton={console.log("hej")} >
+              REQUEST A CALL
             </Button>
           </div>
         </div>
