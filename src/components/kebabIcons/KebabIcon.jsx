@@ -12,16 +12,16 @@ export default function KebabIcon() {
           <div></div>
         </div>
         <div className="menu">
-          <div>
-            <ul>
+          <div className='flex flex-col items-start justify-start w-full h-full '>
+            <ul className='list-none'>
               {infoboxHeaderMock.map((props) => 
               
-                (<li key={props.id}><Infobox id={props.id} iconRef={props.imgRef} information={props.information} subInformation={props.subInformation} isVisible={props.isVisible} width={props.width} height={props.height}/></li>)
+                (<li className='m-3' key={props.id}><Infobox id={props.id} iconRef={props.imgRef} information={props.information} subInformation={props.subInformation} isVisible={props.isVisible} width={props.width} height={props.height}/></li>)
               )}
-              <Button className="h-10 bg-blue-500 rounded w-28" onClickButton={console.log("hej")} >
-                <span className='text-sm '>REQUEST A CALL</span>
-              </Button>
             </ul>
+            <Button className="w-full h-10 bg-blue-500 rounded" onClickButton={console.log("hej")} >
+              <span className='text-sm '>REQUEST A CALL</span>
+            </Button>
           </div>
         </div>
       </div>
