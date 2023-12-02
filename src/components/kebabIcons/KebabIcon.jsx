@@ -5,7 +5,7 @@ import Button from '../buttons/Button'
 
 export default function KebabIcon() {
   return (
-    <div id="container" className='flex flex-row items-center justify-center p-2 m-0 bg-white w-fit h-fit'>
+    <div id="container" className='flex flex-row items-center justify-center p-2 m-0 bg-white w-fit h-fit lg:hidden'>
       <div id="menu-wrap" className='relative w-5 h-5'>
         <input type="checkbox" className="toggler" />
         <div className="dots">
