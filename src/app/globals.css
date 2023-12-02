@@ -62,10 +62,7 @@ body {
   background-color: rgba(255, 255, 255, 0.8);
   padding: 0px 15px;
   box-shadow: 2px 4px 6px rgba(49, 49, 49, 0.2);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
+  display: none;
   opacity: 0;
   visibility: hidden;
 }
@@ -76,13 +73,6 @@ body {
 
 #container #menu-wrap .menu ul li {
   margin: 15px 0;
-}
-
-#container #menu-wrap .menu ul li .link {
-  text-decoration: none;
-  color: rgba(49, 49, 49, 0.85);
-  opacity: 0;
-  visibility: hidden;
 }
 
 #container #menu-wrap .toggler {
@@ -96,61 +86,15 @@ body {
   z-index: 2;
 }
 
-#container #menu-wrap .toggler:hover + .dots > div,
-#container #menu-wrap .toggler:hover + .dots > div:after,
-#container #menu-wrap .toggler:hover + .dots > div:before {
-  background-color: rgba(49, 49, 49, 0.6);
-}
-
-#container #menu-wrap .toggler:checked + .dots > div {
-  transform: translateX(calc(((25px / 2) - (6px / 2)) * -0.7071067812))
-    translateY(calc(((25px / 2) - (6px / 2)) * -0.7071067812));
-}
-
-#container #menu-wrap .toggler:checked + .dots > div:after {
-  transform: translateX(calc(((25px / 2) - (6px / 2)) * 0.7071067812))
-    translateY(calc((2 * (25px / 2) - (6px / 2)) * 0.7071067812));
-}
-
-#container #menu-wrap .toggler:checked + .dots > div:before {
-  transform: translateX(calc(2 * (((25px / 2) - (6px / 2)) * 0.7071067812)))
-    translateY(
-      calc(((25px / 2) - (6px / 2)) - (((25px / 2) - (6px / 2)) * 0.7071067812))
-    );
-}
-
-#container #menu-wrap .toggler:checked:hover + .dots > div,
-#container #menu-wrap .toggler:checked:hover + .dots > div:after,
-#container #menu-wrap .toggler:checked:hover + .dots > div:before {
-  background-color: rgba(49, 49, 49, 0.6);
-  transition: 0.5s;
-}
 
 #container #menu-wrap .toggler:checked ~ .menu {
   opacity: 1;
   visibility: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   width: 50dvw;
   height: 30dvh;
   transition: 0.5s;
-}
-
-#container #menu-wrap .toggler:checked ~ .menu ul .link {
-  opacity: 1;
-  visibility: visible;
-  transition: 0.5s ease 0.3s;
-}
-
-#container #menu-wrap .toggler:checked ~ .menu ul .link:hover {
-  color: #2980b9;
-  transition: 0.2s;
-}
-
-#container #menu-wrap .toggler:not(:checked) ~ .menu {
-  transition: 0.5s;
-}
-
-#container #menu-wrap .toggler:not(:checked) ~ .menu ul .link {
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.1s;
 }
