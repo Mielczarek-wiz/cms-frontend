@@ -11,10 +11,10 @@ export default function Infobox({id, iconRef="", information="", subInformation=
             </div>
             <div className='flex flex-col items-center justify-center'>
                 <div>
-                    <span className='text-sm'>{information}</span>
+                    <span className='text-sm md:text-lg'>{information}</span>
                 </div>
                 <div>
-                    <span className='text-sm'>{subInformation}</span>
+                    <span className='text-sm md:text-lg'>{subInformation}</span>
                 </div>
             </div>
 
