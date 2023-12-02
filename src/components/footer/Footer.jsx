@@ -3,38 +3,38 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="bg-neutral-800 p-8">
+    <footer className="p-8 bg-neutral-800">
       <div className="">
           {generalLayoutMock.map((item) => {
             return item.key === "aboutUsTitle" ?
-            <p className="text-white font-bold">
+            <p key={item.id} className="font-bold text-white">
                 {item.value}
             </p>
             :
-            <></>
+            null
           })}
           {generalLayoutMock.map((item) => {
             return item.key === "aboutUsText" ?
-            <p className="text-neutral-500 mt-6">
+            <p key={item.id} className="mt-6 text-neutral-500">
                 {item.value}
             </p>
             :
-            <></>
+            null
           })}
       </div>
-      <div className="text-white font-bold py-8">
+      <div className="py-8 font-bold text-white">
         HERE BE NAV
       </div>
-      <hr className="h-px my-8 bg-neutral-500 border-0"/>
-      <div className="flex flex-col md:flex-row lg:flex-row justify-between max-h-32 items-start">
+      <hr className="h-px my-8 border-0 bg-neutral-500"/>
+      <div className="flex flex-col items-start justify-between md:flex-row lg:flex-row max-h-32">
         <Image src="/images/logo-light-115x34.png" alt="Logo" width={115} height={10} />
         {generalLayoutMock.map((item) => {
             return item.key === "copyrightText" ?
-            <span className="text-neutral-500 mt-6">
+            <span key={item.id} className="mt-6 text-neutral-500">
                 {item.value}
             </span>
             :
-            <></>
+            null
           })}
       </div>
     </footer>
