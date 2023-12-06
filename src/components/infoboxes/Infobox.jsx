@@ -5,16 +5,16 @@ export default function Infobox({id, iconRef="", information="", subInformation=
 
     if(!isVisible) return null
     return (
-        <div className='flex flex-row items-center justify-start h-16 w-52'>
-            <div className='pr-4 w-fit h-fit'>
+        <div className='flex flex-row items-center justify-start w-64 h-16'>
+            <div className='flex flex-row items-center justify-center w-10 h-10 mr-4 border rounded-full border-slate-500 '>
                 <Image src={iconRef} alt="Icon alternative" width={width} height={height} />
             </div>
             <div className='flex flex-col items-start justify-center'>
                 <div>
-                    <span className='text-sm md:text-md'>{information}</span>
+                    <span className='text-sm text-slate-500 md:text-md'>{information}</span>
                 </div>
                 <div>
-                    <span className='text-sm md:text-md'>{subInformation}</span>
+                    <span className='text-sm text-slate-500 md:text-md'>{subInformation}</span>
                 </div>
             </div>
 

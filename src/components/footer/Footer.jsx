@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="p-8 bg-neutral-800">
+    <footer className="w-full p-8 bg-neutral-800 h-fit">
       <div className="">
           {generalLayoutMock.map((item) => {
             return item.key === "aboutUsTitle" ?
