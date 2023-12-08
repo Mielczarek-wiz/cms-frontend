@@ -6,6 +6,9 @@ import React from 'react'
 export default function HamburgerIcon() {
     const {isOpen, toggle} = useSidebarContext()
   return (
-    <Hamburger distance='md' label="Show menu" color='black' direction='right' rounded toggled={isOpen} toggle={toggle}  />
+    <div className='w-fit h-fit lg:hidden'>
+        <Hamburger distance='md' label="Show menu" color='black' direction='right' rounded toggled={isOpen} toggle={toggle}  />
+    </div>
+
   )
 }

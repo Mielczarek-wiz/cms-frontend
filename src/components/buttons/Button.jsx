@@ -1,8 +1,8 @@
 'use client'
 
-export default function Button({onClickButton, className, children}) {
+export default function Button({className, children}) {
   return (
-    <button className={className} onClick={onClickButton}>
+    <button className={className}>
         {children}
     </button>
   )
