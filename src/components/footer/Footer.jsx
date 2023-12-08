@@ -3,26 +3,26 @@ import Image from "next/image";
 import Social from "../social/Social"
 
 export default function Footer() {
-  return <footer className="bg-neutral-800 p-8">
+  return <footer className="p-8 bg-neutral-800">
       <div className="">
           {generalLayoutMock.map((item) => {
             return item.key === "aboutUsTitle" ?
-            <p className="text-white font-bold">
+            <p key={item.id} className="font-bold text-white">
                 {item.value}
             </p>
             :
-            <></>
+            null
           })}
           {generalLayoutMock.map((item) => {
             return item.key === "aboutUsText" ?
-            <p className="text-neutral-500 mt-6">
+            <p key={item.id} className="mt-6 text-neutral-500">
                 {item.value}
             </p>
             :
-            <></>
+            null
           })}
       </div>
-      <div className="text-white font-bold py-8">
+      <div className="text-white font-bold py-8 flex flex-rows justify-between">
         <div>HERE BE NAV</div>
         <Social/>
       </div>
