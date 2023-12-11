@@ -1,10 +1,11 @@
-import AllDashboardProviders from "@/components/dashboardSide/providers/AllDashboardProviders";
+import HeaderDash from "@/components/dashboardSide/HeaderDash";
 
 export default function Layout({ children }) {
     return (
-    <AllDashboardProviders>
+    <>
+    <HeaderDash />
         {children}
-    </AllDashboardProviders>
+    </>
 
     )
   }

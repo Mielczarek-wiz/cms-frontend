@@ -1,5 +1,5 @@
 import './globals.css'
-
+import "bootstrap/dist/css/bootstrap.min.css";
 export const metadata = {
   title: 'Content Management System',
   description: 'The site build for the purpose of classes.',
