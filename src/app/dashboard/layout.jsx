@@ -1,9 +1,9 @@
 "use client";
 import classNames from "@/components/modules/classNames";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { navigation } from "./routes/navigation";
 import { userNavigation } from "./routes/userNavigation";
 
@@ -15,6 +15,7 @@ const user = {
 };
 
 export default function Layout({ children }) {
+  const [current, setCurrent] = useState({ ...navigation[0], current: true })
   return (
     <>
       <Disclosure as="nav" className="bg-gray-800">
@@ -25,24 +26,31 @@ export default function Layout({ children }) {
                 <div className="flex items-center">
                   <div className="hidden md:block">
                     <div className="flex items-baseline ml-10 space-x-4">
-                      {navigation.map((item) => (
+                      {navigation.map((item) => {
+
+                        return (
+                        
                         <a
                           key={item.name}
                           href={item.href}
                           className={classNames(
-                            item.current
+                            (current.name === item.name && current.current)
                               ? "bg-gray-900 text-white"
                               : "text-gray-300 hover:bg-gray-700 hover:text-white",
                             "rounded-md px-3 py-2 text-sm font-medium"
                           )}
+                          onClick={() => setCurrent({...item, current: true})}
                           aria-current={item.current ? "page" : undefined}
                         >
                           {item.name}
                         </a>
-                      ))}
+                      )})
+                      }
+                      
                     </div>
                   </div>
                 </div>
+                      
                 <div className="hidden md:block">
                   <div className="ml-4 md:ml-6">
                     {/* Profile dropdown */}
@@ -159,7 +167,7 @@ export default function Layout({ children }) {
       <header className="bg-white shadow">
         <div className="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-            Dashboard
+            {current.name}
           </h1>
         </div>
       </header>

@@ -1,7 +1,10 @@
 export const navigation = [
-    { name: 'Dashboard', href: '#', current: true },
-    { name: 'Team', href: '#', current: false },
-    { name: 'Projects', href: '#', current: false },
-    { name: 'Calendar', href: '#', current: false },
-    { name: 'Reports', href: '#', current: false },
+    { name: 'Users', href: '#' },
+    { name: 'General Layouts', href: '#' },
+    { name: 'Pages', href: '#' },
+    { name: 'Sliders', href: '#' },
+    { name: 'Roles', href: '#' },
+    { name: 'Types', href: '#' },
+    { name: 'Sections', href: '#' },
+    { name: 'Infoboxes', href: '#' },
   ]
