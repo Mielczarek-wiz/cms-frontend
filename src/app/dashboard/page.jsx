@@ -18,7 +18,7 @@ export default function Users() {
   return (
     <>
 
-      <TableDash header={header} columns={rows}/>
+      <TableDash header={header} rows={rows}/>
     </>
   );
 }

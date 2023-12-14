@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Fragment, useState } from "react";
 import { navigation } from "./routes/navigation";
 import { userNavigation } from "./routes/userNavigation";
+import Link from "next/link";
 
 const user = {
   name: "Tom Cook",
@@ -15,47 +16,45 @@ const user = {
 };
 
 export default function Layout({ children }) {
-  const [current, setCurrent] = useState({ ...navigation[0], current: true })
+  const [current, setCurrent] = useState(navigation[0].name);
+  console.log(current);
   return (
     <>
-      <Disclosure as="nav" className="bg-gray-800">
+      <Disclosure as="nav" className="sticky top-0 bg-gray-800">
         {({ open }) => (
           <>
-            <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div className="w-screen px-4 mx-auto sm:px-6 lg:px-8">
               <div className="flex items-center justify-between h-16">
                 <div className="flex items-center">
                   <div className="hidden md:block">
-                    <div className="flex items-baseline ml-10 space-x-4">
-                      {navigation.map((item) => {
-
-                        return (
-                        
-                        <a
+                    <div className="flex items-baseline h-full ml-10 space-x-4 overflow-x-auto overflow-y-hidden md:w-11/12 lg:w-full">
+                      {navigation.map((item) => (
+                        <div
                           key={item.name}
-                          href={item.href}
-                          className={classNames(
-                            (current.name === item.name && current.current)
-                              ? "bg-gray-900 text-white"
-                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                            "rounded-md px-3 py-2 text-sm font-medium"
-                          )}
-                          onClick={() => setCurrent({...item, current: true})}
-                          aria-current={item.current ? "page" : undefined}
+                          className="transparent h-fit w-fit"
                         >
-                          {item.name}
-                        </a>
-                      )})
-                      }
-                      
+                          <Link
+                            href={item.href}
+                            className={classNames(
+                              current.name === item.name
+                                ? "bg-gray-900 text-white"
+                                : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                              "rounded-md px-3 py-2 text-sm font-medium"
+                            )}
+                          >
+                            {item.name}
+                          </Link>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
-                      
+
                 <div className="hidden md:block">
                   <div className="ml-4 md:ml-6">
                     {/* Profile dropdown */}
                     <Menu as="div" className="relative ml-3 rounded-full">
-                      <div >
+                      <div>
                         <Menu.Button className="relative flex items-center max-w-xs text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                           <span className="absolute -inset-1.5" />
                           <span className="sr-only">Open user menu</span>
@@ -64,7 +63,7 @@ export default function Layout({ children }) {
                               width={40}
                               height={40}
                               src={user.imageUrl}
-                              alt=""
+                              alt="User picture"
                             />
                           </div>
                         </Menu.Button>
@@ -82,7 +81,7 @@ export default function Layout({ children }) {
                           {userNavigation.map((item) => (
                             <Menu.Item key={item.name}>
                               {({ active }) => (
-                                <a
+                                <Link
                                   href={item.href}
                                   className={classNames(
                                     active ? "bg-gray-100" : "",
@@ -90,7 +89,7 @@ export default function Layout({ children }) {
                                   )}
                                 >
                                   {item.name}
-                                </a>
+                                </Link>
                               )}
                             </Menu.Item>
                           ))}
@@ -136,7 +135,12 @@ export default function Layout({ children }) {
               <div className="pt-4 pb-3 border-t border-gray-700">
                 <div className="flex items-center px-5">
                   <div className="flex-shrink-0">
-                    <Image width={40} height={40} src={user.imageUrl} alt="" />
+                    <Image
+                      width={40}
+                      height={40}
+                      src={user.imageUrl}
+                      alt="User picture"
+                    />
                   </div>
                   <div className="ml-3">
                     <div className="text-base font-medium leading-none text-white">
@@ -167,7 +171,7 @@ export default function Layout({ children }) {
       <header className="bg-white shadow">
         <div className="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-            {current.name}
+            {current}
           </h1>
         </div>
       </header>
