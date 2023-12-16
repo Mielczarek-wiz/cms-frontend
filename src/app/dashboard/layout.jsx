@@ -23,17 +23,14 @@ export default function Layout({ children }) {
       <Disclosure as="nav" className="sticky top-0 bg-gray-800">
         {({ open }) => (
           <>
-            <div className="w-screen px-4 mx-auto sm:px-6 lg:px-8">
+            <div className="w-full px-4 mx-auto sm:px-6 lg:px-8">
               <div className="flex items-center justify-between h-16">
                 <div className="flex items-center">
                   <div className="hidden md:block">
                     <div className="flex items-baseline h-full ml-10 space-x-4 overflow-x-auto overflow-y-hidden md:w-11/12 lg:w-full">
                       {navigation.map((item) => (
-                        <div
-                          key={item.name}
-                          className="transparent h-fit w-fit"
-                        >
                           <Link
+                            key={item.name}
                             href={item.href}
                             className={classNames(
                               current.name === item.name
@@ -44,7 +41,6 @@ export default function Layout({ children }) {
                           >
                             {item.name}
                           </Link>
-                        </div>
                       ))}
                     </div>
                   </div>
@@ -177,7 +173,7 @@ export default function Layout({ children }) {
       </header>
 
       <main>
-        <div className="py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">{children}</div>
+        <div className="py-8 mx-auto max-w-7xl sm:px-6 lg:px-8">{children}</div>
       </main>
     </>
   );

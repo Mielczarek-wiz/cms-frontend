@@ -1,6 +1,6 @@
 export const navigation = [
-    { name: 'Users', href: '#' },
-    { name: 'General', href: '/general' },
+    { name: 'Users', href: '/dashboard' },
+    { name: 'General', href: '/dashboard/general' },
     { name: 'Pages', href: '#' },
     { name: 'Sliders', href: '#' },
     { name: 'Roles', href: '#' },
