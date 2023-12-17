@@ -1,7 +1,7 @@
 import TableDash from "@/components/dashboardSide/TableDash";
 
 export default function General() {
-  const header = ["ID", "Key", "Value", "Description", "Is Visible?"]
+  const header = ["ID", "Key", "Value", "Description", "Hidden"]
   const rows = [
     {id: "1", key: "Hej1", value: "hej", description: "hello@o2.pl", isVisible: true},
     {id: "2", key: "Hej2", value: "hej", description: "hello@o2.pl", isVisible: true},

@@ -4,7 +4,7 @@ export const navigation = [
     { name: 'Pages', href: '#' },
     { name: 'Sliders', href: '#' },
     { name: 'Roles', href: '#' },
-    { name: 'Types', href: '#' },
+    { name: 'Types', href: '/dashboard/type' },
     { name: 'Sections', href: '#' },
     { name: 'Infoboxes', href: '#' },
   ]

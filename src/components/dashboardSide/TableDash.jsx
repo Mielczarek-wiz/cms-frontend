@@ -13,16 +13,25 @@ export default function TableDash({ header, rows }) {
         </thead>
         <tbody>
           {rows.map((item) => (
-            <tr key={item.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-500">
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                {item.id}
-              </th>
-              <td className="px-6 py-4 dark:text-white">{item.name}</td>
-              <td className="px-6 py-4 dark:text-white">{item.surname}</td>
-              <td className="px-6 py-4 dark:text-white">{item.email}</td>
+            <tr
+              key={item.id}
+              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-500"
+            >
+              {Object.keys(item).map((el) =>
+                el !== "id" ? (
+                  <td key={item[el]} className="px-6 py-4 dark:text-white">
+                    {item[el].toString()}
+                  </td>
+                ) : (
+                  <th
+                    key={item[el]}
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    {item[el].toString()}
+                  </th>
+                )
+              )}
             </tr>
           ))}
         </tbody>
