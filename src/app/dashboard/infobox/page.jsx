@@ -1,0 +1,97 @@
+import TableDash from "@/components/dashboardSide/TableDash";
+
+export default function Infobox() {
+  const header = [
+    "ID",
+    "Icon",
+    "Information",
+    "Subinformation",
+    "Section",
+    "User",
+    "Hidden",
+  ];
+  const rows = [
+    {
+      id: "1",
+      icon: "icon1",
+      information: "Hej1",
+      subinformation: "subinformation1",
+      section: "section1",
+      user: "user1",
+      isVisible: true,
+    },
+    {
+      id: "2",
+      icon: "icon2",
+      information: "Hej2",
+      subinformation: "subinformation2",
+      section: "section2",
+      user: "user2",
+      isVisible: true,
+    },
+    {
+      id: "3",
+      icon: "icon3",
+      information: "Hej3",
+      subinformation: "subinformation3",
+      section: "section3",
+      user: "user3",
+      isVisible: false,
+    },
+    {
+      id: "4",
+      icon: "icon4",
+      information: "Hej4",
+      subinformation: "subinformation4",
+      section: "section4",
+      user: "user4",
+      isVisible: false,
+    },
+    {
+      id: "5",
+      icon: "icon5",
+      information: "Hej5",
+      subinformation: "subinformation5",
+      section: "section5",
+      user: "user5",
+      isVisible: false,
+    },
+    {
+      id: "6",
+      icon: "icon6",
+      information: "Hej6",
+      subinformation: "subinformation6",
+      section: "section6",
+      user: "user6",
+      isVisible: true,
+    },
+    {
+      id: "7",
+      icon: "icon7",
+      information: "Hej7",
+      subinformation: "subinformation7",
+      section: "section7",
+      user: "user7",
+      isVisible: true,
+    },
+    {
+      id: "8",
+      icon: "icon8",
+      information: "Hej8",
+      subinformation: "subinformation8",
+      section: "section8",
+      user: "user8",
+      isVisible: true,
+    },
+    {
+      id: "9",
+      icon: "icon9",
+      information: "Hej9",
+      subinformation: "subinformation9",
+      section: "section9",
+      user: "user9",
+      isVisible: true,
+    },
+  ];
+  return <TableDash header={header} rows={rows} />;
+}

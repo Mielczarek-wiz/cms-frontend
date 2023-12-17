@@ -1,10 +1,10 @@
 export const navigation = [
     { name: 'Users', href: '/dashboard' },
     { name: 'General', href: '/dashboard/general' },
-    { name: 'Pages', href: '#' },
-    { name: 'Sliders', href: '#' },
-    { name: 'Roles', href: '#' },
+    { name: 'Pages', href: '/dashboard/page' },
+    { name: 'Sliders', href: '/dashboard/slider' },
+    { name: 'Roles', href: '/dashboard/role' },
     { name: 'Types', href: '/dashboard/type' },
-    { name: 'Sections', href: '#' },
-    { name: 'Infoboxes', href: '#' },
+    { name: 'Sections', href: '/dashboard/section' },
+    { name: 'Infoboxes', href: '/dashboard/infobox' },
   ]
