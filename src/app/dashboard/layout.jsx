@@ -17,7 +17,6 @@ const user = {
 
 export default function Layout({ children }) {
   const [current, setCurrent] = useState(navigation[0].name);
-  console.log(current);
   return (
     <>
       <Disclosure as="nav" className="sticky top-0 bg-gray-800">
@@ -29,18 +28,20 @@ export default function Layout({ children }) {
                   <div className="hidden md:block">
                     <div className="flex items-baseline h-full ml-10 space-x-4 overflow-x-auto overflow-y-hidden md:w-11/12 lg:w-full">
                       {navigation.map((item) => (
-                        <div
+                        <Link
                           key={item.name}
                           className={classNames(
                             current === item.name
                               ? "bg-gray-900 text-white"
                               : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                            "rounded-md px-3 py-2 text-sm font-medium"
+                            "rounded-md h-10 w-20 flex flex-row items-center justify-center"
                           )}
-                          onClick={() => setCurrent(item.name)}
+                          href={item.href}
                         >
-                          <Link href={item.href}>{item.name}</Link>
-                        </div>
+                          <span className="flex flex-row items-center justify-center w-full h-full text-sm font-medium text-center" onClick={() => setCurrent(item.name)}>
+                            {item.name}
+                          </span>
+                        </Link>
                       ))}
                     </div>
                   </div>

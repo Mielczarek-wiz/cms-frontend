@@ -1,4 +1,4 @@
-import TableDash from "@/components/dashboardSide/TableDash";
+import {TableDash} from "@/components/dashboardSide/TableDash";
 
 export default function Slider() {
   const header = ["ID", "Text", "Title", "Img", "User", "Hidden"];

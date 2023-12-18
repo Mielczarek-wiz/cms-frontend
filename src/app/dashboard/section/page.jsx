@@ -1,7 +1,6 @@
-import TableDash from "@/components/dashboardSide/TableDash";
-import React from "react";
+import {TableDash} from "@/components/dashboardSide/TableDash";
 
-export default function page() {
+export default function Sections() {
   const header = [
     "ID",
     "Text",

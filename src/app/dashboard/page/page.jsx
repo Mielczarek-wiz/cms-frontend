@@ -1,4 +1,4 @@
-import TableDash from "@/components/dashboardSide/TableDash";
+import {TableDash} from "@/components/dashboardSide/TableDash";
 
 export default function Pages() {
   const header = ["ID", "Name", "Link", "Page", "User", "Hidden"];
