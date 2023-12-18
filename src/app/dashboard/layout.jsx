@@ -29,18 +29,18 @@ export default function Layout({ children }) {
                   <div className="hidden md:block">
                     <div className="flex items-baseline h-full ml-10 space-x-4 overflow-x-auto overflow-y-hidden md:w-11/12 lg:w-full">
                       {navigation.map((item) => (
-                          <Link
-                            key={item.name}
-                            href={item.href}
-                            className={classNames(
-                              current.name === item.name
-                                ? "bg-gray-900 text-white"
-                                : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                              "rounded-md px-3 py-2 text-sm font-medium"
-                            )}
-                          >
-                            {item.name}
-                          </Link>
+                        <div
+                          key={item.name}
+                          className={classNames(
+                            current === item.name
+                              ? "bg-gray-900 text-white"
+                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            "rounded-md px-3 py-2 text-sm font-medium"
+                          )}
+                          onClick={() => setCurrent(item.name)}
+                        >
+                          <Link href={item.href}>{item.name}</Link>
+                        </div>
                       ))}
                     </div>
                   </div>
