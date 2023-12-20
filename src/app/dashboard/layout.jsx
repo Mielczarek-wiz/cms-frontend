@@ -19,7 +19,7 @@ export default function Layout({ children }) {
   const [current, setCurrent] = useState(navigation[0].name);
   return (
     <>
-      <Disclosure as="nav" className="sticky top-0 bg-gray-800">
+      <Disclosure as="nav" className="sticky top-0 bg-gray-800 border-b border-slate-600">
         {({ open }) => (
           <>
             <div className="w-full px-4 mx-auto sm:px-6 lg:px-8">
@@ -165,15 +165,15 @@ export default function Layout({ children }) {
           </>
         )}
       </Disclosure>
-      <header className="bg-white shadow">
+      <header className="border-b shadow bg-slate-800 border-slate-500">
         <div className="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+          <h1 className="text-3xl font-bold tracking-tight text-white">
             {current}
           </h1>
         </div>
       </header>
 
-      <main>
+      <main className="bg-slate-600">
         <div className="py-8 mx-auto max-w-7xl sm:px-6 lg:px-8">{children}</div>
       </main>
     </>
