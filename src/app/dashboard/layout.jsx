@@ -7,16 +7,13 @@ import { Fragment, useState } from "react";
 import { navigation } from "./routes/navigation";
 import { userNavigation } from "./routes/userNavigation";
 import Link from "next/link";
-
-const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
-  imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
+import { useUserStore } from "@/zustand/store";
 
 export default function Layout({ children }) {
   const [current, setCurrent] = useState(navigation[0].name);
+  const user = useUserStore((state) => state.user);
+  const userNameSplited = user.name.split(" ");
+  const acronym = userNameSplited[0][0] +userNameSplited[1][0];
   return (
     <>
       <Disclosure as="nav" className="sticky top-0 bg-gray-800 border-b border-slate-600">
@@ -55,13 +52,8 @@ export default function Layout({ children }) {
                         <Menu.Button className="relative flex items-center max-w-xs text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                           <span className="absolute -inset-1.5" />
                           <span className="sr-only">Open user menu</span>
-                          <div className="rounded-full h-fit w-fit">
-                            <Image
-                              width={40}
-                              height={40}
-                              src={user.imageUrl}
-                              alt="User picture"
-                            />
+                          <div className="flex flex-row items-center justify-center flex-1 w-10 h-10 text-white border border-gray-700 rounded-full">
+                            {acronym}
                           </div>
                         </Menu.Button>
                       </div>
@@ -131,13 +123,8 @@ export default function Layout({ children }) {
               </div>
               <div className="pt-4 pb-3 border-t border-gray-700">
                 <div className="flex items-center px-5">
-                  <div className="flex-shrink-0">
-                    <Image
-                      width={40}
-                      height={40}
-                      src={user.imageUrl}
-                      alt="User picture"
-                    />
+                  <div className="flex flex-row items-center justify-center flex-shrink-0 w-10 h-10 text-white border border-gray-700 rounded-full ">
+                    {acronym}
                   </div>
                   <div className="ml-3">
                     <div className="text-base font-medium leading-none text-white">
