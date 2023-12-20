@@ -1,5 +1,5 @@
 'use client'
-import { useSidebarContext } from '@/providers/sidebar/SidebarProvider'
+import { useSidebarContext } from '@/components/clientSide/providers/sidebar/SidebarProvider'
 import Hamburger from 'hamburger-react'
 import React from 'react'
 
