@@ -2,21 +2,29 @@
 import classNames from "@/components/modules/classNames";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
 import { Fragment, useState } from "react";
 import { navigation } from "./routes/navigation";
 import { userNavigation } from "./routes/userNavigation";
 import Link from "next/link";
-import { useUserStore } from "@/zustand/store";
+import { useUserStore } from "@/zustand/useUserStore";
+import { useRouter } from "next/navigation";
 
 export default function Layout({ children }) {
   const [current, setCurrent] = useState(navigation[0].name);
   const user = useUserStore((state) => state.user);
-  const userNameSplited = user.name.split(" ");
-  const acronym = userNameSplited[0][0] +userNameSplited[1][0];
+  const logout = useUserStore((state) => state.logout);
+  const router = useRouter();
+
+  if (user.name === null) {
+    router.replace("/login");
+  }
+
   return (
     <>
-      <Disclosure as="nav" className="sticky top-0 bg-gray-800 border-b border-slate-600">
+      <Disclosure
+        as="nav"
+        className="sticky top-0 bg-gray-800 border-b border-slate-600"
+      >
         {({ open }) => (
           <>
             <div className="w-full px-4 mx-auto sm:px-6 lg:px-8">
@@ -35,7 +43,10 @@ export default function Layout({ children }) {
                           )}
                           href={item.href}
                         >
-                          <span className="flex flex-row items-center justify-center w-full h-full text-sm font-medium text-center" onClick={() => setCurrent(item.name)}>
+                          <span
+                            className="flex flex-row items-center justify-center w-full h-full text-sm font-medium text-center"
+                            onClick={() => setCurrent(item.name)}
+                          >
                             {item.name}
                           </span>
                         </Link>
@@ -53,7 +64,8 @@ export default function Layout({ children }) {
                           <span className="absolute -inset-1.5" />
                           <span className="sr-only">Open user menu</span>
                           <div className="flex flex-row items-center justify-center flex-1 w-10 h-10 text-white border border-gray-700 rounded-full">
-                            {acronym}
+                            {user.name.split(" ")[0][0] +
+                              user.name.split(" ")[1][0]}
                           </div>
                         </Menu.Button>
                       </div>
@@ -82,6 +94,12 @@ export default function Layout({ children }) {
                               )}
                             </Menu.Item>
                           ))}
+                          <Menu.Button
+                            onClick={() => {logout(), router.forward('/login')}}
+                            className="flex flex-row items-center justify-start w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          >
+                            Sign out
+                          </Menu.Button>
                         </Menu.Items>
                       </Transition>
                     </Menu>
@@ -124,7 +142,7 @@ export default function Layout({ children }) {
               <div className="pt-4 pb-3 border-t border-gray-700">
                 <div className="flex items-center px-5">
                   <div className="flex flex-row items-center justify-center flex-shrink-0 w-10 h-10 text-white border border-gray-700 rounded-full ">
-                    {acronym}
+                    {user.name.split(" ")[0][0] + user.name.split(" ")[1][0]}
                   </div>
                   <div className="ml-3">
                     <div className="text-base font-medium leading-none text-white">
@@ -146,6 +164,12 @@ export default function Layout({ children }) {
                       {item.name}
                     </Disclosure.Button>
                   ))}
+                  <Disclosure.Button
+                    onClick={() => {logout(), router.forward('/login')}}
+                    className="block px-3 py-2 text-base font-medium text-gray-400 rounded-md hover:bg-gray-700 hover:text-white"
+                  >
+                    Sign out
+                  </Disclosure.Button>
                 </div>
               </div>
             </Disclosure.Panel>
