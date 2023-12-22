@@ -1,9 +1,3 @@
 export default function Layout({ children }) {
-    return (
-      <>
-      
-        {children}
-      </>
-
-    )
-  }
+  return <section className="w-full h-full">{children}</section>;
+}
