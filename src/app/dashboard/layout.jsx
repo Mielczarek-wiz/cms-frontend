@@ -17,6 +17,7 @@ export default function Layout({ children }) {
 
   if (user.name === null) {
     router.replace("/login");
+    return null
   }
 
   return (
@@ -95,7 +96,7 @@ export default function Layout({ children }) {
                             </Menu.Item>
                           ))}
                           <Menu.Button
-                            onClick={() => {logout(), router.forward('/login')}}
+                            onClick={() => {logout()}}
                             className="flex flex-row items-center justify-start w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                           >
                             Sign out
@@ -165,7 +166,7 @@ export default function Layout({ children }) {
                     </Disclosure.Button>
                   ))}
                   <Disclosure.Button
-                    onClick={() => {logout(), router.forward('/login')}}
+                    onClick={() => {logout()}}
                     className="block px-3 py-2 text-base font-medium text-gray-400 rounded-md hover:bg-gray-700 hover:text-white"
                   >
                     Sign out
