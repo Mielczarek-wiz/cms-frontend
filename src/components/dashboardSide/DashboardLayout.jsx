@@ -5,19 +5,11 @@ import classNames from "@/components/modules/classNames";
 import { navigation } from "@/app/dashboard/routes/navigation";
 import { userNavigation } from "@/app/dashboard/routes/userNavigation";
 import { useUserStore } from "@/zustand/useUserStore";
-import { Fragment, useLayoutEffect } from "react";
-import { useRouter } from "next/navigation";
+import { Fragment } from "react";
 
-export default function DisclosureDashboard({ current, setCurrent }) {
+export default function DashboardLayout({ current, setCurrent }) {
   const user = useUserStore((state) => state.user);
   const logout = useUserStore((state) => state.logout);
-  const router = useRouter();
-
-  useLayoutEffect(() => {
-    if (!user.name) {
-      router.replace("/login");
-    }
-  }, [user.name, router]);
 
   return (
     <Disclosure
