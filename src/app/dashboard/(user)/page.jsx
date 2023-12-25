@@ -1,6 +1,15 @@
+"use client";
 import { TableDash } from "@/components/dashboardSide/TableDash";
+import { useCallPost, useCallPut } from "@/server/api/swr/apiCalls";
 
 export default function Users() {
+  const test = useCallPut("https://jsonplaceholder.typicode.com/posts/1", {
+    id: 1,
+    title: "foo",
+    body: "bar",
+    userId: 1,
+  });
+  console.log(test);
   const header = ["ID", "Name", "Surname", "Email", "Role"];
   const rows = [
     {
