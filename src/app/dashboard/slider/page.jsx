@@ -1,4 +1,4 @@
-import {TableDash} from "@/components/dashboardSide/TableDash";
+import { TableDash } from "@/components/dashboardSide/TableDash";
 
 export default function Slider() {
   const header = ["ID", "Text", "Title", "Img", "User", "Hidden"];
@@ -36,7 +36,7 @@ export default function Slider() {
       isVisible: true,
     },
     {
-      id: "4",
+      id: "44",
       text: "text4",
       title: "title4",
       img: "imgref4",
