@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image.js";
 
 import { useState, useCallback, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
@@ -33,27 +34,41 @@ export default function TestimonialsSection() {
   }, [emblaApi, setScrollSnaps, onSelect]);
 
   return (
-    <div className="p-32">
-      <div className="embla">
+    <div className="">
+      <div className="embla mx-0 md:mx-32 py-4">
         <div className="embla__viewport overflow-hidden" ref={emblaRef}>
           <div className="embla__container flex">
             {testimonialsMock.map((item) => {
               return (
                 <div
-                  className="embla__slide flex flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_34%]"
+                  className="embla__slide flex flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_34%] flex-col p-4"
                   key={item.id}
                 >
-                  {item.id}
+                  <div className="flex">
+                    <Image src={item.photo} width="96" height="96" alt="person"/>
+                    <div>
+                      <p className="text-neutral-900 text-2xl">{item.clientName}</p>
+                      <p className="text-neutral-600">{item.clientType}</p>
+                    </div>
+                  </div>   
+                  <div>
+                    <p className="text-neutral-500 font-thin">{item.testimonialText}</p>
+                  </div>              
                 </div>
               );
             })}
           </div>
         </div>
       </div>
-      <div className="embla__navigator flex justify-between p-32">
+      <div className="embla__navigator flex justify-center items-center mt-4">
         {scrollSnaps.map((_, index) => (
           <div
-            className="embla__dot block h-2 w-2 hover:h-4 hover:w-4 bg-neutral-300 hover:bg-blue-600 transition rounded-full"
+            className={`embla__dot block ${
+              selectedIndex === index
+                ? "bg-blue-500 h-4 w-4 mx-4"
+                : "bg-neutral-200 h-2 w-2 mx-5 hover:bg-blue-500 hover:h-4 hover:w-4 hover:mx-4"
+            } transition-all duration-200 rounded-full
+            my-0`}
             key={index}
             onClick={() => scrollTo(index)}
           />
