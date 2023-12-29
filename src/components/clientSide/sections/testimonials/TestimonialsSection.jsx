@@ -1,40 +1,54 @@
 "use client";
 import Image from "next/image.js";
-
+import { useRef } from "react";
+import Autoplay from "embla-carousel-autoplay";
 import { useState, useCallback, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { testimonialsMock } from "./mock.js";
 
 export default function TestimonialsSection() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: true,
-    align: "start",
-    breakpoints: {
-      "(min-width: 768px)": { slidesToScroll: 2 },
-      "(min-width: 1024px)": { slidesToScroll: 3 },
-    },
-  });
+  //All the stuff needed for the carousel to function
+  const autoplay = useRef(
+    Autoplay(
+      { delay: 3000, stopOnInteraction: false },
+      (emblaRoot) => emblaRoot.parentElement
+    )
+  );
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState([]);
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      loop: true,
+      align: "start",
+      breakpoints: {
+        "(min-width: 768px)": { slidesToScroll: 2 },
+        "(min-width: 1024px)": { slidesToScroll: 3 },
+      },
+    },
+    [autoplay.current]
+  );
   const scrollTo = useCallback(
     (index) => emblaApi && emblaApi.scrollTo(index),
     [emblaApi]
   );
-
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
+    autoplay.current.reset();
   }, [emblaApi, setSelectedIndex]);
-
   useEffect(() => {
     if (!emblaApi) return;
     onSelect();
     setScrollSnaps(emblaApi.scrollSnapList());
     emblaApi.on("select", onSelect);
   }, [emblaApi, setScrollSnaps, onSelect]);
+  //End of that, returning to usual Next.js stuff
 
   return (
-    <div className="">
+    <div>
+      <p className="text-3xl text-neutral-900 flex text-center justify-center">
+        TESTIMONIALS
+      </p>
       <div className="embla mx-0 md:mx-32 py-4">
         <div className="embla__viewport overflow-hidden" ref={emblaRef}>
           <div className="embla__container flex">
@@ -45,15 +59,25 @@ export default function TestimonialsSection() {
                   key={item.id}
                 >
                   <div className="flex">
-                    <Image src={item.photo} width="96" height="96" alt="person"/>
+                    <Image
+                      src={item.photo}
+                      width="50"
+                      height="50"
+                      alt="person"
+                      className="rounded-full mr-6 mb-6"
+                    />
                     <div>
-                      <p className="text-neutral-900 text-2xl">{item.clientName}</p>
+                      <p className="text-neutral-900 text-2xl">
+                        {item.clientName}
+                      </p>
                       <p className="text-neutral-600">{item.clientType}</p>
                     </div>
-                  </div>   
+                  </div>
                   <div>
-                    <p className="text-neutral-500 font-thin">{item.testimonialText}</p>
-                  </div>              
+                    <p className="text-neutral-500 font-thin">
+                      {item.testimonialText}
+                    </p>
+                  </div>
                 </div>
               );
             })}
