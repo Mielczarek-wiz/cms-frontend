@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image.js";
 import { useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
