@@ -28,18 +28,14 @@ export default function CategoriesSection() {
         {categoriesMock.map((item) => {
           return (
             <div key={item.id} className="flex flex-col">
-              <a
+              <Image
+                src={item.photo}
+                width="270"
+                height="300"
+                alt="property"
+                className="rounded-md p-2 hover:brightness-75 transition-full duration-500 hover:cursor-pointer"
                 onClick={() => handleRedirectToProperty(item)}
-                className="hover:cursor-pointer"
-              >
-                <Image
-                  src={item.photo}
-                  width="270"
-                  height="300"
-                  alt="property"
-                  className="rounded-md p-2 hover:brightness-75 transition-full duration-500"
-                />
-              </a>
+              />
               <a
                 onClick={() => handleRedirectToProperty(item)}
                 className="text-neutral-900 hover:text-blue-500 transition-full duration-500 hover:cursor-pointer"
