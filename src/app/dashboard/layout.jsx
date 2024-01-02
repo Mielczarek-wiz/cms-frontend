@@ -3,6 +3,7 @@ import DashboardLayout from "@/components/dashboardSide/DashboardLayout";
 import { useState } from "react";
 import { navigation } from "./routes/navigation";
 import WithAuth from "@/components/dashboardSide/HOC/withAuth";
+import AddButton from "@/components/dashboardSide/AddButton";
 
 export default function Layout({ children }) {
   const [current, setCurrent] = useState(navigation[0].name);
@@ -17,6 +18,7 @@ export default function Layout({ children }) {
         </div>
       </header>
       <main className="py-8 mx-auto h-fit max-w-7xl sm:px-6 lg:px-8">
+        <AddButton form={current} />
         {children}
       </main>
     </WithAuth>

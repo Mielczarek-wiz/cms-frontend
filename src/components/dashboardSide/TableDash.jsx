@@ -6,7 +6,6 @@ const Table = ({ header, rows }) => {
   const tableHeader = [...header, "Actions"];
   return (
     <>
-      <AddButton />
       <div className="w-full h-[62dvh]">
         <div className="w-full h-full overflow-auto">
           <table className="w-full text-sm text-left text-gray-500 rtl:text-right dark:text-gray-400">

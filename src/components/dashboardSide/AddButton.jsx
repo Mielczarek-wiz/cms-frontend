@@ -3,7 +3,8 @@ import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import FormPopup from "./forms/FormPopup";
 import { useState } from "react";
 
-export default function AddButton() {
+export default function AddButton({ form }) {
+  console.log(form);
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
@@ -14,7 +15,7 @@ export default function AddButton() {
         <PlusCircleIcon className="w-6 h-6 text-green-500" />{" "}
         <span>Add new</span>
       </button>
-      {isOpen ? <FormPopup setIsOpen={setIsOpen} /> : null}
+      {isOpen ? <FormPopup setIsOpen={setIsOpen} form={form} /> : null}
     </>
   );
 }
