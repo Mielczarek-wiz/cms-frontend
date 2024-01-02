@@ -16,8 +16,8 @@ export default function Layout({ children }) {
           </h1>
         </div>
       </header>
-      <main className=" bg-slate-600">
-        <div className="py-8 mx-auto max-w-7xl sm:px-6 lg:px-8">{children}</div>
+      <main className="py-8 mx-auto h-fit max-w-7xl sm:px-6 lg:px-8">
+        {children}
       </main>
     </WithAuth>
   );
