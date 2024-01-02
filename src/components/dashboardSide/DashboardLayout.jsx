@@ -13,7 +13,7 @@ export default function DashboardLayout({ current, setCurrent }) {
   return (
     <Disclosure
       as="nav"
-      className="sticky top-0 bg-gray-800 border-b border-slate-600"
+      className="sticky top-0 z-50 bg-gray-800 border-b  border-slate-600"
     >
       {({ open }) => (
         <>
@@ -79,7 +79,7 @@ export default function DashboardLayout({ current, setCurrent }) {
               </Menu>
               <div className="flex p-2 -mr-2 md:hidden">
                 {/* Mobile menu button */}
-                <Disclosure.Button className="relative inline-flex items-center justify-center p-2 text-gray-400 bg-gray-800 rounded-md hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                <Disclosure.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-gray-800 rounded-md hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XMarkIcon className="block w-6 h-6" aria-hidden="true" />
