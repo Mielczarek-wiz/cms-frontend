@@ -56,7 +56,7 @@ export default function TestimonialsSection() {
             {testimonialsMock.map((item) => {
               return (
                 <div
-                  className="embla__slide flex flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_34%] flex-col p-4"
+                  className="embla__slide flex flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_34%] flex-col p-4 bg-[url('/images/best-offers-bg-1807-526.png')]"
                   key={item.id}
                 >
                   <div className="flex">
