@@ -8,7 +8,7 @@ export default function Login() {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col justify-center flex-1 min-h-full px-6 py-12 lg:px-8">
+    <div className="flex flex-col justify-center flex-1 h-full px-6 py-12 lg:px-8">
       <div className="flex flex-col items-center justify-center sm:mx-auto sm:w-full sm:max-w-sm">
         <Image
           src="/images/logo-default-151x44.png"
