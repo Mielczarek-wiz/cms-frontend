@@ -1,4 +1,4 @@
-import {TableDash} from "@/components/dashboardSide/TableDash";
+import { TableDash } from "@/components/dashboardSide/TableDash";
 
 export default function Types() {
   const header = ["ID", "Type", "Hidden"];
@@ -24,5 +24,5 @@ export default function Types() {
     { id: "19", type: "Hej19", isVisible: false },
     { id: "20", type: "Hej20", isVisible: true },
   ];
-  return <TableDash header={header} rows={rows} />;
+  return <TableDash header={header} rows={rows} form="Types" />;
 }

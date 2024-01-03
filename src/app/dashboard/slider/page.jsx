@@ -76,5 +76,5 @@ export default function Slider() {
       isVisible: false,
     },
   ];
-  return <TableDash header={header} rows={rows} />;
+  return <TableDash header={header} rows={rows} form="Sliders" />;
 }

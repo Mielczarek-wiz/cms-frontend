@@ -1,4 +1,4 @@
-import {TableDash} from "@/components/dashboardSide/TableDash";
+import { TableDash } from "@/components/dashboardSide/TableDash";
 
 export default function Sections() {
   const header = [
@@ -53,7 +53,7 @@ export default function Sections() {
       isVisible: true,
     },
     {
-      id: "4",
+      id: "44",
       text: "text4",
       title: "title4",
       subtitle: "subtitle4",
@@ -103,5 +103,5 @@ export default function Sections() {
       isVisible: false,
     },
   ];
-  return <TableDash header={header} rows={rows} />;
+  return <TableDash header={header} rows={rows} form="Sections" />;
 }

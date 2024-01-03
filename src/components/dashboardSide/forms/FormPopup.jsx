@@ -1,6 +1,6 @@
 import Image from "next/image";
 import UsersForm from "./userForms/UsersForm";
-import GeneralForm from "./generalForms/GeneralForm";
+import GeneralsForm from "./generalsForms/GeneralsForm";
 import PagesForm from "./pagesForms/PagesForm";
 import SlidersForm from "./slidersForms/SlidersForm";
 import RolesForm from "./rolesForms/RolesForm";
@@ -8,14 +8,14 @@ import TypesForm from "./typesForms.jsx/TypesForm";
 import SectionsForm from "./sectionsForms/SectionsForm";
 import InfoboxesForm from "./infoboxesForms/InfoboxesForm";
 
-export default function FormPopup({ setIsOpen, form }) {
+export default function FormPopup({ setIsOpen, form, item = null }) {
   const renderForm = (form) => {
     switch (form) {
       case "Users":
-        return <UsersForm />;
+        return <UsersForm item={item} />;
         break;
-      case "General":
-        return <GeneralForm />;
+      case "Generals":
+        return <GeneralsForm item={item} />;
         break;
       case "Pages":
         return <PagesForm />;

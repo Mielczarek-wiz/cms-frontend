@@ -6,5 +6,5 @@ export default function Roles() {
     { id: "1", name: "Moderator", isVisible: true },
     { id: "2", name: "Admin", isVisible: true },
   ];
-  return <TableDash header={header} rows={rows} />;
+  return <TableDash header={header} rows={rows} form="Roles" />;
 }

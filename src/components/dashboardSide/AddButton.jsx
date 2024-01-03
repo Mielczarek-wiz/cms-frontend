@@ -4,7 +4,6 @@ import FormPopup from "./forms/FormPopup";
 import { useState } from "react";
 
 export default function AddButton({ form }) {
-  console.log(form);
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>

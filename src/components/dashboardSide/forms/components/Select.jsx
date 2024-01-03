@@ -1,10 +1,16 @@
 export default function Select({ register, label, name, options }) {
   return (
-    <div className="flex flex-col items-start justify-center">
-      <label className="p-1 italic font-semibold text-left" htmlFor={name}>
+    <div className="flex flex-col items-start justify-center text-black">
+      <label
+        className="p-1 italic font-semibold text-left text-black"
+        htmlFor={name}
+      >
         {label}:
       </label>
-      <select className="w-full px-2 border rounded-md h-7" {...register(name)}>
+      <select
+        className="w-full px-2 text-black border rounded-md h-7"
+        {...register(name)}
+      >
         {options.map((option) => (
           <option key={option} value={option}>
             {option.toString()}

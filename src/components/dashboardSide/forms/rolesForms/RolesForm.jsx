@@ -13,7 +13,7 @@ export default function RolesForm() {
   const onSubmit = (data) => console.log(data);
   return (
     <div className="space-y-4 h-fit w-fit">
-      <span className="flex flex-row items-center self-center justify-center text-xl italic font-semibold text-center border-b border-black ">
+      <span className="flex flex-row items-center self-center justify-center text-xl italic font-semibold text-center text-black border-b border-black ">
         Add new role
       </span>
       <form onSubmit={handleSubmit(onSubmit)}>

@@ -1,4 +1,4 @@
-import {TableDash} from "@/components/dashboardSide/TableDash";
+import { TableDash } from "@/components/dashboardSide/TableDash";
 
 export default function Infobox() {
   const header = [
@@ -93,5 +93,5 @@ export default function Infobox() {
       isVisible: true,
     },
   ];
-  return <TableDash header={header} rows={rows} />;
+  return <TableDash header={header} rows={rows} form="Infoboxes" />;
 }

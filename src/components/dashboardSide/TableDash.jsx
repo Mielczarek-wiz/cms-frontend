@@ -2,7 +2,7 @@ import { memo } from "react";
 import AddButton from "./AddButton";
 import ManageButtons from "./ManageButtons";
 
-const Table = ({ header, rows }) => {
+const Table = ({ header, rows, form }) => {
   const tableHeader = [...header, "Actions"];
   return (
     <>
@@ -40,7 +40,7 @@ const Table = ({ header, rows }) => {
                     )
                   )}
                   <td>
-                    <ManageButtons />
+                    <ManageButtons form={form} item={item}/>
                   </td>
                 </tr>
               ))}
