@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image.js";
 import useEmblaCarousel from "embla-carousel-react";
 import { mainSliderMock } from "./mock.js";
 import { useState, useCallback, useEffect } from "react";
