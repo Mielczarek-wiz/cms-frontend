@@ -35,6 +35,7 @@
     "date-arithmetic": "^4.1.0",
     "date-fns": "^2.30.0",
     "dropzone": "^6.0.0-beta.2",
+    "embla-carousel-autoplay": "^8.0.0-rc17",
     "embla-carousel-react": "^8.0.0-rc15",
     "globalize": "^1.7.0",
     "google-map-react": "^2.2.1",
