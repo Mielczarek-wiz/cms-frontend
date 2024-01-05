@@ -11,7 +11,7 @@ export default function Layout({ children }) {
       <Sidebar>
         <Menu />
       </Sidebar>
-      <div className="flex flex-col items-center justify-start h-screen">
+      <div className="flex flex-col items-center justify-start h-screen bg-white">
         <main className="w-full h-fit">{children}</main>
         <Footer />
       </div>

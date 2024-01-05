@@ -1,4 +1,4 @@
-import {TableDash} from "@/components/dashboardSide/TableDash";
+import { TableDash } from "@/components/dashboardSide/TableDash";
 
 export default function Generals() {
   const header = ["ID", "Key", "Value", "Description", "User", "Hidden"];
@@ -9,7 +9,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user6",
-      isVisible: true,
+      hidden: true,
     },
     {
       id: "2",
@@ -17,7 +17,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user1",
-      isVisible: true,
+      hidden: true,
     },
     {
       id: "3",
@@ -25,7 +25,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user1",
-      isVisible: false,
+      hidden: false,
     },
     {
       id: "4",
@@ -33,7 +33,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user1",
-      isVisible: true,
+      hidden: true,
     },
     {
       id: "5",
@@ -41,7 +41,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user5",
-      isVisible: true,
+      hidden: true,
     },
     {
       id: "6",
@@ -49,7 +49,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user1",
-      isVisible: true,
+      hidden: true,
     },
     {
       id: "7",
@@ -57,7 +57,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user1",
-      isVisible: true,
+      hidden: true,
     },
     {
       id: "8",
@@ -65,7 +65,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user1",
-      isVisible: true,
+      hidden: true,
     },
     {
       id: "9",
@@ -73,7 +73,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user3",
-      isVisible: false,
+      hidden: false,
     },
     {
       id: "10",
@@ -81,7 +81,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user1",
-      isVisible: true,
+      hidden: true,
     },
     {
       id: "11",
@@ -89,7 +89,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user1",
-      isVisible: true,
+      hidden: true,
     },
     {
       id: "12",
@@ -97,7 +97,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user1",
-      isVisible: true,
+      hidden: true,
     },
     {
       id: "13",
@@ -105,7 +105,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user4",
-      isVisible: true,
+      hidden: true,
     },
     {
       id: "14",
@@ -113,7 +113,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user1",
-      isVisible: true,
+      hidden: true,
     },
     {
       id: "15",
@@ -121,7 +121,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user1",
-      isVisible: true,
+      hidden: true,
     },
     {
       id: "16",
@@ -129,7 +129,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user2",
-      isVisible: false,
+      hidden: false,
     },
     {
       id: "17",
@@ -137,7 +137,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user1",
-      isVisible: true,
+      hidden: true,
     },
     {
       id: "18",
@@ -145,7 +145,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user1",
-      isVisible: true,
+      hidden: true,
     },
     {
       id: "19",
@@ -153,7 +153,7 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user3",
-      isVisible: false,
+      hidden: false,
     },
     {
       id: "20",
@@ -161,12 +161,12 @@ export default function Generals() {
       value: "hej",
       description: "hello@o2.pl",
       user: "user1",
-      isVisible: true,
+      hidden: true,
     },
   ];
   return (
     <>
-      <TableDash header={header} rows={rows} />
+      <TableDash header={header} rows={rows} form="Generals" />
     </>
   );
 }

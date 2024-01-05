@@ -1,3 +1,5 @@
 export default function Layout({ children }) {
-  return <section className="w-full h-full bg-slate-200">{children}</section>;
+  return (
+    <section className="w-screen h-screen bg-slate-200">{children}</section>
+  );
 }
