@@ -29,10 +29,16 @@ export default function GeneralsForm({ item }) {
   const onSubmit = (data) => console.log(data);
   return (
     <div className="space-y-4 h-fit w-fit">
-      <span className="flex flex-row items-center self-center justify-center text-xl italic font-semibold text-center text-black border-b border-black">
-        Add new generals
-      </span>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      {item !== null ? (
+        <span className="flex flex-row items-center self-center justify-center text-xl italic font-semibold text-center text-black border-b border-black ">
+          Modifying {item.key}
+        </span>
+      ) : (
+        <span className="flex flex-row items-center self-center justify-center text-xl italic font-semibold text-center text-black border-b border-black ">
+          Add new generals
+        </span>
+      )}
+      <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
         <Input label={"key"} register={register} />
         <Input label={"value"} register={register} />
         <Input label={"description"} register={register} />

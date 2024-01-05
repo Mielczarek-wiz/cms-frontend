@@ -1,6 +1,6 @@
 export default function Select({ register, label, name, options }) {
   return (
-    <div className="flex flex-col items-start justify-center text-black">
+    <div className="flex flex-col items-start justify-center w-full text-black">
       <label
         className="p-1 italic font-semibold text-left text-black"
         htmlFor={name}

@@ -6,7 +6,7 @@ export default function Input({ label, register, type = "text", required }) {
       </label>
       <input
         type={type}
-        className="px-2 text-black border rounded-md h-7 w-30"
+        className="w-full px-2 text-black border rounded-md h-7"
         {...register(label, { required })}
       />
     </div>

@@ -42,7 +42,7 @@ export default function UsersForm({ item }) {
           Add new user
         </span>
       )}
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
         <Input label={"name"} register={register} />
         <Input label={"surname"} register={register} />
         <Input label={"email"} register={register} type="email" />
