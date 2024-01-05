@@ -6,14 +6,14 @@ import { navigation } from "@/app/dashboard/routes/navigation";
 import { userNavigation } from "@/app/dashboard/routes/userNavigation";
 import { useUserStore } from "@/zustand/useUserStore";
 
-export default function DashboardLayout({ current, setCurrent }) {
+export default function DashboardLayout({ current, handleSave }) {
   const user = useUserStore((state) => state.user);
   const logout = useUserStore((state) => state.logout);
 
   return (
     <Disclosure
       as="nav"
-      className="sticky top-0 z-50 bg-gray-800 border-b  border-slate-600"
+      className="sticky top-0 z-50 bg-gray-800 border-b border-slate-600"
     >
       {({ open }) => (
         <>
@@ -33,7 +33,7 @@ export default function DashboardLayout({ current, setCurrent }) {
                   >
                     <span
                       className="flex flex-row items-center justify-center p-4 text-sm font-medium text-center"
-                      onClick={() => setCurrent(item.name)}
+                      onClick={() => handleSave(item.name)}
                     >
                       {item.name}
                     </span>
@@ -104,7 +104,7 @@ export default function DashboardLayout({ current, setCurrent }) {
                   )}
                   aria-current={item.current ? "page" : undefined}
                 >
-                  <span onClick={() => setCurrent(item.name)}>{item.name}</span>
+                  <span onClick={() => handleSave(item.name)}>{item.name}</span>
                 </Link>
               ))}
             </div>
