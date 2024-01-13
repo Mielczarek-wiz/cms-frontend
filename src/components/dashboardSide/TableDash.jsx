@@ -1,5 +1,4 @@
 import { memo } from "react";
-import AddButton from "./AddButton";
 import ManageButtons from "./ManageButtons";
 
 const Table = ({ header, rows, form }) => {
@@ -40,7 +39,7 @@ const Table = ({ header, rows, form }) => {
                     )
                   )}
                   <td>
-                    <ManageButtons form={form} item={item}/>
+                    <ManageButtons form={form} item={item} />
                   </td>
                 </tr>
               ))}
