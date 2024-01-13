@@ -4,17 +4,21 @@ import { persist } from "zustand/middleware";
 export const useUserStore = create(
   persist(
     (set) => ({
-      user: { name: null, email: null },
-      login: () => {
+      user: { name: null, email: null, role: null, token: null },
+      login: ({ name, email, role, accessToken }) => {
         set(() => ({
           user: {
-            name: "Tom Cook",
-            email: "tom@example.com",
+            name: name,
+            email: email,
+            role: role,
+            token: accessToken,
           },
         }));
       },
       logout: () => {
-        set(() => ({ user: { name: null, email: null } }));
+        set(() => ({
+          user: { name: null, email: null, role: null, token: null },
+        }));
       },
     }),
     {

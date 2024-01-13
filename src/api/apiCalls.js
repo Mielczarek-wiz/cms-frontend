@@ -3,26 +3,15 @@ import useSWR from "swr";
 import ky from "ky";
 import { useCallback, useState } from "react";
 import { mainUrl } from "./apiRoutes";
+import { useRouter } from "next/navigation";
 
-const fetcherGet = async ({ url, options }) => {
-  const allOptions = {
-    ...options,
-    prefixUrl: mainUrl,
-    method: "get",
-  };
-  try {
-    const response = await ky(url, allOptions).json();
-    return response;
-  } catch (e) {
-    return e;
-  }
-};
 export const useCallGet = (url, options = {}) => {
+  const router = useRouter();
   const { data, error, isLoading } = useSWR(
     { url: url, options: options },
     fetcherGet
   );
-
+  handleError(error.response?.status, router);
   return { data, error, isLoading };
 };
 
@@ -47,6 +36,7 @@ const useCall = (method) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const router = useRouter();
 
   const call = useCallback(
     async (url, body = {}) => {
@@ -59,14 +49,33 @@ const useCall = (method) => {
         };
         const res = await ky(url, options).json();
         setData(res);
-      } catch (e) {
-        setError(e);
+      } catch (error) {
+        handleError(error.response?.status, router);
+        setError(error);
       } finally {
         setIsLoading(false);
       }
     },
-    [method]
+    [method, router]
   );
 
   return { data, error, isLoading, call };
+};
+const fetcherGet = async ({ url, options }) => {
+  const allOptions = {
+    ...options,
+    prefixUrl: mainUrl,
+    method: "get",
+  };
+  const response = await ky(url, allOptions).json();
+  return response;
+};
+const handleError = (status, router) => {
+  switch (status) {
+    case 403:
+      router.push("/login");
+      break;
+    default:
+      break;
+  }
 };
