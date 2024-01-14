@@ -1,7 +1,12 @@
 "use client";
+
+import { useCallDelete } from "@/api/apiCalls";
+import { getRoute } from "@/api/apiRoutes";
 import { TableDash } from "@/components/dashboardSide/TableDash";
 
 export default function Users() {
+
+
   const header = ["ID", "Name", "Surname", "Email", "Role"];
   const rows = [
     {
@@ -147,6 +152,9 @@ export default function Users() {
   ];
   return (
     <>
+      <button className="bg-red-500" onClick={() => test()}>
+        Test
+      </button>
       <TableDash header={header} rows={rows} form="Users" />
     </>
   );

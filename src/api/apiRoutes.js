@@ -9,7 +9,7 @@ const routes = {
   sliders: "slider",
   sections: "section",
   types: "section/type",
-  infoboxes: "section/infobox",
+  infoboxes: "section/infobox"
 };
 
 export const getRoute = (route) => {
