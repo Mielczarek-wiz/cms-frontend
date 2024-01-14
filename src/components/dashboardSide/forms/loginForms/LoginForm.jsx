@@ -9,19 +9,17 @@ import { useForm } from "react-hook-form";
 
 export default function LoginForm() {
   const login = useUserStore((state) => state.login);
-  const { data, error, isLoading, callPost } = useCallPost();
+  const { callPost } = useCallPost();
   const router = useRouter();
   const onSubmit = async (data) => {
-    await callPost(getRoute("auth"), {
+    const res = await callPost(getRoute("auth"), {
       email: data.email,
       password: data.password,
     });
-  };
 
-  if (data !== null) {
-    login(data);
+    login(res);
     router.push("/dashboard");
-  }
+  };
 
   const {
     register,

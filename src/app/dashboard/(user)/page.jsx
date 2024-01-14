@@ -1,4 +1,5 @@
 "use client";
+
 import { TableDash } from "@/components/dashboardSide/TableDash";
 
 export default function Users() {

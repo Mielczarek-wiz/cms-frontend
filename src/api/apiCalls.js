@@ -1,75 +1,69 @@
 "use client";
-import useSWR from "swr";
 import ky from "ky";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { mainUrl } from "./apiRoutes";
 import { useRouter } from "next/navigation";
+import { useUserStore } from "@/zustand/useUserStore";
 
-export const useCallGet = (url, options = {}) => {
-  const router = useRouter();
-  const { data, error, isLoading } = useSWR(
-    { url: url, options: options },
-    fetcherGet
-  );
-  handleError(error.response?.status, router);
-  return { data, error, isLoading };
+export const useCallGet = () => {
+  const { call } = useCall("get");
+  return { callGet: call };
 };
 
 export const useCallPost = () => {
-  const { data, error, isLoading, call } = useCall("post");
-  return { data, error, isLoading, callPost: call };
+  const { call } = useCall("post");
+  return { callPost: call };
 };
 
 export const useCallPut = () => {
-  const { data, error, isLoading, call } = useCall("put");
-  return { data, error, isLoading, callPut: call };
+  const { call } = useCall("put");
+  return { callPut: call };
 };
 export const useCallPatch = () => {
-  const { data, error, isLoading, call } = useCall("patch");
-  return { data, error, isLoading, callPatch: call };
+  const { call } = useCall("patch");
+  return { callPatch: call };
 };
 export const useCallDelete = () => {
-  const { data, error, isLoading, call } = useCall("delete");
-  return { data, error, isLoading, callDelete: call };
+  const { call } = useCall("delete");
+  return { callDelete: call };
 };
 const useCall = (method) => {
-  const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const router = useRouter();
 
   const call = useCallback(
-    async (url, body = {}) => {
+    async (url = "", body = {}, withAuth = false) => {
       try {
-        setIsLoading(true);
         const options = {
           prefixUrl: mainUrl,
           method: method,
-          json: body,
         };
+        if (method !== "get") {
+          options.json = body;
+        }
+        if (withAuth) {
+          options.hooks = {
+            beforeRequest: [
+              (request) => {
+                request.headers.set(
+                  "Authorization",
+                  `Bearer ${useUserStore.getState().user.token}`
+                );
+              },
+            ],
+          };
+        }
         const res = await ky(url, options).json();
-        setData(res);
+        return res;
       } catch (error) {
         handleError(error.response?.status, router);
-        setError(error);
-      } finally {
-        setIsLoading(false);
       }
     },
     [method, router]
   );
 
-  return { data, error, isLoading, call };
+  return { call };
 };
-const fetcherGet = async ({ url, options }) => {
-  const allOptions = {
-    ...options,
-    prefixUrl: mainUrl,
-    method: "get",
-  };
-  const response = await ky(url, allOptions).json();
-  return response;
-};
+
 const handleError = (status, router) => {
   switch (status) {
     case 403:
@@ -79,3 +73,30 @@ const handleError = (status, router) => {
       break;
   }
 };
+
+/* 
+EXAMPLE USING POST (DELETE, PUT, PATCH in the same way)
+  const { callPost } = useCallPost();
+  const onSubmit = async (data) => {
+    const res = await callPost(getRoute("auth"), {
+      email: data.email,
+      password: data.password,
+    });
+  };
+    
+  const { callDelete } = useCallDelete();
+  const test = async () => {
+    const res = await callDelete(getRoute("users") + "/1", {}, true);
+    console.log(res.toString());
+  };
+
+EXAMPLE USING GET
+  const { callGet } = useCallGet();
+  useEffect(() => {
+    const getData = async () => {
+      const res = await callGet(getRoute("users"), {}, true); 
+      console.log(res);
+    };
+    getData();
+  }, [callGet]);
+*/
