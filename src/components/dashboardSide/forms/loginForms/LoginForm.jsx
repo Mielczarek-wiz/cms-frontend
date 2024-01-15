@@ -18,7 +18,7 @@ export default function LoginForm() {
     });
 
     login(res);
-    router.push("/dashboard");
+    router.push("/dashboard/general");
   };
 
   const {
