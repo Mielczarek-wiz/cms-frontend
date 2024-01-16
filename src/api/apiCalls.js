@@ -52,10 +52,12 @@ const useCall = (method) => {
             ],
           };
         }
-        const res = await ky(url, options).json();
-        return res;
+        const res = await ky(url, options);
+        const data = await res.json();
+        return data;
       } catch (error) {
-        handleError(error.response?.status, router);
+        const message = await error.response?.json();
+        handleError(error.response?.status, message, router);
       }
     },
     [method, router]
@@ -64,10 +66,13 @@ const useCall = (method) => {
   return { call };
 };
 
-const handleError = (status, router) => {
+const handleError = (status, message, router) => {
   switch (status) {
     case 403:
       router.push("/login");
+      break;
+    case 400:
+      console.log(message);
       break;
     default:
       break;

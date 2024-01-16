@@ -9,8 +9,6 @@ import { useUserStore } from "@/zustand/useUserStore";
 export default function DashboardLayout({ current, handleSave }) {
   const user = useUserStore((state) => state.user);
   const logout = useUserStore((state) => state.logout);
-
-  console.log(user.role === "Moderator");
   return (
     <Disclosure
       as="nav"
