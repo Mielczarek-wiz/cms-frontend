@@ -1,4 +1,8 @@
+"use client";
+import AddButton from "@/components/dashboardSide/AddButton";
 import { TableDash } from "@/components/dashboardSide/TableDash";
+import FormPopup from "@/components/dashboardSide/forms/FormPopup";
+import { useState } from "react";
 
 export default function Types() {
   const header = ["ID", "Type", "User", "Hidden"];
@@ -24,5 +28,33 @@ export default function Types() {
     { id: "19", type: "Hej19", user: "Pani Basia", hidden: false },
     { id: "20", type: "Hej20", user: "Pani Basia", hidden: true },
   ];
-  return <TableDash header={header} rows={rows} form="Types" />;
+  const handleDelete = async (id) => {
+    console.log(id);
+  };
+  const handleAddAndModify = async (data) => {
+    console.log(data);
+  };
+  const [popUp, setPopUp] = useState({
+    isOpen: false,
+    item: {},
+  });
+  return (
+    <>
+      <AddButton setPopUp={setPopUp} />
+      <TableDash
+        header={header}
+        rows={rows}
+        setPopUp={setPopUp}
+        handleDelete={handleDelete}
+      />
+      {popUp.isOpen ? (
+        <FormPopup
+          setPopUp={setPopUp}
+          form={"Types"}
+          item={popUp.item}
+          handleAddAndModify={handleAddAndModify}
+        />
+      ) : null}
+    </>
+  );
 }

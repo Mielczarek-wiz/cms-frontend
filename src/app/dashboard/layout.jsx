@@ -32,7 +32,6 @@ export default function Layout({ children }) {
         </div>
       </header>
       <main className="py-8 mx-auto h-fit max-w-7xl sm:px-6 lg:px-8">
-        <AddButton form={current} />
         {children}
       </main>
     </WithAuth>

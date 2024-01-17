@@ -1,10 +1,8 @@
 "use client";
-import { memo, useState } from "react";
+import { memo } from "react";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
-import FormPopup from "./forms/FormPopup";
 
-const Table = ({ header, rows, form, handleDelete = null }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Table = ({ header, rows, setPopUp, handleDelete = null }) => {
   const tableHeader = [...header, "Actions"];
   return (
     <>
@@ -48,7 +46,11 @@ const Table = ({ header, rows, form, handleDelete = null }) => {
                       )}
                       <td>
                         <div className="flex flex-row items-center justify-start px-6 py-4 space-x-4 dark:text-white">
-                          <button onClick={() => setIsOpen(true)}>
+                          <button
+                            onClick={() => {
+                              setPopUp({ item: item, isOpen: true });
+                            }}
+                          >
                             <PencilSquareIcon className="w-6 h-6 text-blue-500 hover:cursor-pointer" />
                           </button>
                           <button onClick={() => handleDelete(item.id)}>
@@ -57,13 +59,6 @@ const Table = ({ header, rows, form, handleDelete = null }) => {
                         </div>
                       </td>
                     </tr>
-                    {isOpen ? (
-                      <FormPopup
-                        setIsOpen={setIsOpen}
-                        form={form}
-                        item={item}
-                      />
-                    ) : null}
                   </>
                 ))}
               </tbody>

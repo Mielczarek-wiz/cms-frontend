@@ -8,32 +8,53 @@ import TypesForm from "./typesForms.jsx/TypesForm";
 import SectionsForm from "./sectionsForms/SectionsForm";
 import InfoboxesForm from "./infoboxesForms/InfoboxesForm";
 
-export default function FormPopup({ setIsOpen, form, item = null }) {
+export default function FormPopup({
+  setPopUp,
+  form,
+  item = null,
+  handleAddAndModify = null,
+}) {
   const renderForm = (form) => {
     switch (form) {
       case "Users":
-        return <UsersForm item={item} />;
+        return (
+          <UsersForm item={item} handleAddAndModify={handleAddAndModify} />
+        );
         break;
       case "Generals":
-        return <GeneralsForm item={item} />;
+        return (
+          <GeneralsForm item={item} handleAddAndModify={handleAddAndModify} />
+        );
         break;
       case "Pages":
-        return <PagesForm item={item} />;
+        return (
+          <PagesForm item={item} handleAddAndModify={handleAddAndModify} />
+        );
         break;
       case "Sliders":
-        return <SlidersForm item={item} />;
+        return (
+          <SlidersForm item={item} handleAddAndModify={handleAddAndModify} />
+        );
         break;
       case "Roles":
-        return <RolesForm item={item} />;
+        return (
+          <RolesForm item={item} handleAddAndModify={handleAddAndModify} />
+        );
         break;
       case "Types":
-        return <TypesForm item={item} />;
+        return (
+          <TypesForm item={item} handleAddAndModify={handleAddAndModify} />
+        );
         break;
       case "Sections":
-        return <SectionsForm item={item} />;
+        return (
+          <SectionsForm item={item} handleAddAndModify={handleAddAndModify} />
+        );
         break;
       case "Infoboxes":
-        return <InfoboxesForm item={item} />;
+        return (
+          <InfoboxesForm item={item} handleAddAndModify={handleAddAndModify} />
+        );
         break;
       default:
         setIsOpen(false);
@@ -47,11 +68,11 @@ export default function FormPopup({ setIsOpen, form, item = null }) {
         <div className="relative z-50 max-h-screen p-8 overflow-x-hidden overflow-y-auto bg-white w-fit">
           <button
             className="absolute p-1 bg-red-600 rounded top-2 right-2 hover:bg-red-800"
-            onClick={() => setIsOpen(false)}
+            onClick={() => setPopUp({ item: null, isOpen: false })}
           >
             <Image src="/x.svg" alt="Close" width={25} height={25} />
           </button>
-          {renderForm(form)}
+          {renderForm(form, handleAddAndModify)}
         </div>
       </div>
     </div>

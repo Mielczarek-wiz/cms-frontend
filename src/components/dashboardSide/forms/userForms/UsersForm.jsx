@@ -4,7 +4,10 @@ import Input from "../components/Input";
 import Radio from "../components/Radio";
 import Submit from "../components/Submit";
 
-export default function UsersForm({ item }) {
+export default function UsersForm({
+  item,
+  handleAddAndModify = handleAddAndModify,
+}) {
   let defaultValues = {};
   if (item !== null) {
     defaultValues = {
@@ -30,7 +33,7 @@ export default function UsersForm({ item }) {
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues: defaultValues });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => handleAddAndModify(data);
   return (
     <div className="space-y-4 h-fit w-fit">
       {item !== null ? (
