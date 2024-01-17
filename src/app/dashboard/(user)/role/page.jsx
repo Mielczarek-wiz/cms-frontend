@@ -1,10 +1,5 @@
 "use client";
-import {
-  useCallDelete,
-  useCallGet,
-  useCallPost,
-  useCallPut,
-} from "@/api/apiCalls";
+import { useCall } from "@/api/apiCalls";
 import { getRoute } from "@/api/apiRoutes";
 import AddButton from "@/components/dashboardSide/AddButton";
 import { TableDash } from "@/components/dashboardSide/TableDash";
@@ -25,34 +20,32 @@ export default function Roles() {
     item: {},
   });
   const [rows, setRows] = useState([]);
-  const { callGet } = useCallGet();
-  const { callDelete } = useCallDelete();
-  const { callPost } = useCallPost();
-  const { callPut } = useCallPut();
+  const { call } = useCall();
 
   const fetchData = useCallback(async () => {
-    const res = await callGet(getRoute("roles"), {}, true);
+    const res = await call("get", getRoute("roles"), {}, true);
     setRows(res);
-  }, [callGet]);
+  }, [call]);
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
 
   const handleDelete = async (id) => {
-    const res = await callDelete(getRoute("roles") + `/${id}`, {}, true);
+    const res = await call("delete", getRoute("roles") + `/${id}`, {}, true);
     fetchData();
   };
   const handleAddAndModify = async (data) => {
     data = { ...data, user: user.email };
     if (popUp.item !== null) {
-      const res = await callPut(
+      const res = await call(
+        "put",
         getRoute("roles") + `/${popUp.item.id}`,
         data,
         true
       );
     } else {
-      const res = await callPost(getRoute("roles"), data, true);
+      const res = await call("post", getRoute("roles"), data, true);
     }
     setPopUp({ ...popUp, isOpen: false });
     fetchData();

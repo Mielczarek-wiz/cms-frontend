@@ -1,5 +1,5 @@
 "use client";
-import { useCallPost } from "@/api/apiCalls";
+import { useCall } from "@/api/apiCalls";
 import { useUserStore } from "@/zustand/useUserStore";
 import Input from "../components/Input";
 import Submit from "../components/Submit";
@@ -9,10 +9,10 @@ import { useForm } from "react-hook-form";
 
 export default function LoginForm() {
   const login = useUserStore((state) => state.login);
-  const { callPost } = useCallPost();
+  const { call } = useCall();
   const router = useRouter();
   const onSubmit = async (data) => {
-    const res = await callPost(getRoute("auth"), {
+    const res = await call("post", getRoute("auth"), {
       email: data.email,
       password: data.password,
     });
