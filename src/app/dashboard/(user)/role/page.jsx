@@ -37,6 +37,7 @@ export default function Roles() {
   };
   const handleAddAndModify = async (data) => {
     data = { ...data, user: user.email };
+    console.log(data);
     if (popUp.item !== null) {
       const res = await call(
         "put",

@@ -5,7 +5,7 @@ import Radio from "../components/Radio";
 import Submit from "../components/Submit";
 import InputFile from "../components/InputFile";
 
-export default function SlidersForm({ item }) {
+export default function SlidersForm({ item, handleAddAndModify }) {
   let defaultValues = {};
   if (item !== null) {
     defaultValues = {
@@ -25,7 +25,7 @@ export default function SlidersForm({ item }) {
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues: defaultValues });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => handleAddAndModify(data);
   return (
     <div className="space-y-4 h-fit w-fit">
       {item !== null ? (

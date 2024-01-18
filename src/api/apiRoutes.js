@@ -4,12 +4,12 @@ const routes = {
   auth: "auth",
   users: "user",
   roles: "user/role",
-  generals: "general",
-  pages: "page",
-  sliders: "slider",
-  sections: "section",
-  types: "section/type",
-  infoboxes: "section/infobox"
+  generals: "general/secured",
+  pages: "page/secured",
+  sliders: "slider/secured",
+  sections: "section/secured",
+  types: "section/type/secured",
+  infoboxes: "section/infobox/secured",
 };
 
 export const getRoute = (route) => {

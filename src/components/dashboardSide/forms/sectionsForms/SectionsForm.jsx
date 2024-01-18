@@ -6,7 +6,7 @@ import Select from "../components/Select";
 import Submit from "../components/Submit";
 import MultipleCheckboxes from "../components/MultipleCheckboxes";
 
-export default function SectionsForm({ item }) {
+export default function SectionsForm({ item, handleAddAndModify }) {
   let defaultValues = {};
   if (item !== null) {
     defaultValues = {
@@ -32,7 +32,7 @@ export default function SectionsForm({ item }) {
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues: defaultValues });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => handleAddAndModify(data);
   return (
     <div className="space-y-4 h-fit w-fit">
       {item !== null ? (
