@@ -1,24 +1,30 @@
 "use client";
-import { useCallPost } from "@/api/apiCalls";
+import { useCall } from "@/api/apiCalls";
 import { useUserStore } from "@/zustand/useUserStore";
 import Input from "../components/Input";
 import Submit from "../components/Submit";
 import { useRouter } from "next/navigation";
 import { getRoute } from "@/api/apiRoutes";
 import { useForm } from "react-hook-form";
+import { getNavigation } from "@/app/dashboard/routes/navigation";
+import Error from "../components/Error";
 
 export default function LoginForm() {
   const login = useUserStore((state) => state.login);
-  const { callPost } = useCallPost();
+  const { call } = useCall();
   const router = useRouter();
   const onSubmit = async (data) => {
-    const res = await callPost(getRoute("auth"), {
+    const res = await call("post", getRoute("auth"), {
       email: data.email,
       password: data.password,
     });
 
     login(res);
-    router.push("/dashboard");
+    if (typeof window !== "undefined" && window.localStorage) {
+      router.push(getNavigation(localStorage.getItem("current")).href);
+    } else {
+      router.push("/dashboard/general");
+    }
   };
 
   const {
@@ -34,18 +40,15 @@ export default function LoginForm() {
         register={register}
         required={"Email is required"}
       />
-      {errors.email && (
-        <span className="text-red-500">{errors.email.message}</span>
-      )}
+      {errors.email && <Error message={errors.email.message} />}
       <Input
         label={"password"}
         register={register}
         type="password"
         required={"Password is required"}
       />
-      {errors.password && (
-        <span className="text-red-500">{errors.password.message}</span>
-      )}
+      {errors.password && <Error message={errors.password.message} />}
+
       <Submit />
     </form>
   );

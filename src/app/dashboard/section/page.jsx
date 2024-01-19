@@ -1,4 +1,9 @@
+"use client";
+import AddButton from "@/components/dashboardSide/AddButton";
+import PageComponent from "@/components/dashboardSide/PageComponent";
 import { TableDash } from "@/components/dashboardSide/TableDash";
+import FormPopup from "@/components/dashboardSide/forms/FormPopup";
+import { useState } from "react";
 
 export default function Sections() {
   const header = ["ID", "Text", "Title", "Subtitle", "Type", "User", "Hidden"];
@@ -85,5 +90,5 @@ export default function Sections() {
       hidden: false,
     },
   ];
-  return <TableDash header={header} rows={rows} form="Sections" />;
+  return <PageComponent form={"Sections"} header={header} initialRows={rows} />;
 }

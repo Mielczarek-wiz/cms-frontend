@@ -1,4 +1,5 @@
-import { TableDash } from "@/components/dashboardSide/TableDash";
+"use client";
+import PageComponent from "@/components/dashboardSide/PageComponent";
 
 export default function Types() {
   const header = ["ID", "Type", "User", "Hidden"];
@@ -24,5 +25,5 @@ export default function Types() {
     { id: "19", type: "Hej19", user: "Pani Basia", hidden: false },
     { id: "20", type: "Hej20", user: "Pani Basia", hidden: true },
   ];
-  return <TableDash header={header} rows={rows} form="Types" />;
+  return <PageComponent form={"Types"} header={header} initialRows={rows} />;
 }

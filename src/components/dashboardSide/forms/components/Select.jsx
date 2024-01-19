@@ -8,7 +8,7 @@ export default function Select({ register, label, name, options }) {
         {label}:
       </label>
       <select
-        className="w-full px-2 text-black border rounded-md h-7"
+        className="w-full px-2 text-black border rounded-md h-7 form-select"
         {...register(name)}
       >
         {options.map((option) => (

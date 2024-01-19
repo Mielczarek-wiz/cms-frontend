@@ -1,10 +1,14 @@
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import Fieldset from "../components/Fieldset";
 import Input from "../components/Input";
 import Radio from "../components/Radio";
 import Submit from "../components/Submit";
+import Error from "../components/Error";
 
-export default function UsersForm({ item }) {
+export default function UsersForm({
+  item,
+  handleAddAndModify = handleAddAndModify,
+}) {
   let defaultValues = {};
   if (item !== null) {
     defaultValues = {
@@ -29,8 +33,9 @@ export default function UsersForm({ item }) {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm({ defaultValues: defaultValues });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => handleAddAndModify(data);
   return (
     <div className="space-y-4 h-fit w-fit">
       {item !== null ? (
@@ -43,11 +48,49 @@ export default function UsersForm({ item }) {
         </span>
       )}
       <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
-        <Input label={"name"} register={register} />
-        <Input label={"surname"} register={register} />
-        <Input label={"email"} register={register} type="email" />
-        <Input label={"password"} register={register} type="password" />
-        <Input label={"confirmPassword"} register={register} type="password" />
+        <Input
+          label={"name"}
+          register={register}
+          required={"Name is required"}
+        />
+        {errors.name && <Error message={errors.name.message} />}
+        <Input
+          label={"surname"}
+          register={register}
+          required={"Surname is required"}
+        />
+        {errors.surname && <Error message={errors.surname.message} />}
+        <Input
+          label={"email"}
+          register={register}
+          type="email"
+          required={"Email is required"}
+        />
+        {errors.email && <Error message={errors.email.message} />}
+        <Input
+          label={"password"}
+          register={register}
+          type="password"
+          required={"Password is required"}
+          pattern={{
+            value:
+              /(?=^.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$/i,
+            message: "Password must be a strong",
+          }}
+        />
+        {errors.password && <Error message={errors.password.message} />}
+        <Input
+          label={"confirmPassword"}
+          register={register}
+          type="password"
+          required={"Confirmation password is required"}
+          validate={(value) =>
+            value === watch("password") || "The passwords do not match"
+          }
+        />
+        {errors.confirmPassword && (
+          <Error message={errors.confirmPassword.message} />
+        )}
         <Fieldset legend="Select a role">
           <Radio value={"Moderator"} register={register} group={"role"} />
           <Radio value={"Admin"} register={register} group={"role"} />

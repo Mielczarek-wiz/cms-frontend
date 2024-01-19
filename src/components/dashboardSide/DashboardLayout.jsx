@@ -1,15 +1,16 @@
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Disclosure, Menu } from "@headlessui/react";
 import Link from "next/link";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import classNames from "@/components/modules/classNames";
 import { navigation } from "@/app/dashboard/routes/navigation";
 import { userNavigation } from "@/app/dashboard/routes/userNavigation";
 import { useUserStore } from "@/zustand/useUserStore";
+import { useRouter } from "next/navigation";
 
 export default function DashboardLayout({ current, handleSave }) {
   const user = useUserStore((state) => state.user);
   const logout = useUserStore((state) => state.logout);
-
+  const router = useRouter();
   return (
     <Disclosure
       as="nav"
@@ -20,25 +21,29 @@ export default function DashboardLayout({ current, handleSave }) {
           <div className="px-4 py-2 sm:px-6 lg:px-8">
             <div className="flex flex-row items-center justify-end md:justify-between">
               <div className="hidden md:w-4/5 lg:w-full md:overflow-y-hidden md:overflow-x-auto md:space-x-4 md:ml-10 md:items-baseline md:flex md:flex-row md:justify-start">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    className={classNames(
-                      current === item.name
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "rounded-md flex flex-row items-center justify-center "
-                    )}
-                    href={item.href}
-                  >
-                    <span
-                      className="flex flex-row items-center justify-center p-4 text-sm font-medium text-center"
-                      onClick={() => handleSave(item.name)}
+                {navigation.map((item) =>
+                  user.role === "Moderator" && !item.showForMod ? (
+                    <></>
+                  ) : (
+                    <Link
+                      key={item.name}
+                      className={classNames(
+                        current === item.name
+                          ? "bg-gray-900 text-white"
+                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                        "rounded-md flex flex-row items-center justify-center "
+                      )}
+                      href={item.href}
                     >
-                      {item.name}
-                    </span>
-                  </Link>
-                ))}
+                      <span
+                        className="flex flex-row items-center justify-center p-4 text-sm font-medium text-center"
+                        onClick={() => handleSave(item.name)}
+                      >
+                        {item.name}
+                      </span>
+                    </Link>
+                  )
+                )}
               </div>
 
               {/* Profile dropdown */}
@@ -92,21 +97,27 @@ export default function DashboardLayout({ current, handleSave }) {
           </div>
           <Disclosure.Panel className=" md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block rounded-md px-3 py-2 text-base font-medium"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
-                >
-                  <span onClick={() => handleSave(item.name)}>{item.name}</span>
-                </Link>
-              ))}
+              {navigation.map((item) =>
+                user.role === "Moderator" && !item.showForMod ? (
+                  <></>
+                ) : (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={classNames(
+                      item.current
+                        ? "bg-gray-900 text-white"
+                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                      "block rounded-md px-3 py-2 text-base font-medium"
+                    )}
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    <span onClick={() => handleSave(item.name)}>
+                      {item.name}
+                    </span>
+                  </Link>
+                )
+              )}
             </div>
             <div className="pt-4 pb-3 border-t border-gray-700">
               <div className="flex items-center px-5">

@@ -1,4 +1,5 @@
-import { TableDash } from "@/components/dashboardSide/TableDash";
+"use client";
+import PageComponent from "@/components/dashboardSide/PageComponent";
 
 export default function Slider() {
   const header = ["ID", "Text", "Title", "User", "Hidden"];
@@ -67,5 +68,5 @@ export default function Slider() {
       hidden: false,
     },
   ];
-  return <TableDash header={header} rows={rows} form="Sliders" />;
+  return <PageComponent form={"Sliders"} header={header} initialRows={rows} />;
 }

@@ -5,8 +5,12 @@ import Radio from "../components/Radio";
 import Select from "../components/Select";
 import Submit from "../components/Submit";
 import MultipleCheckboxes from "../components/MultipleCheckboxes";
+import Error from "../components/Error";
 
-export default function PagesForm({ item }) {
+/* 
+  Here you should do some fetching for "sections" and "page" values.
+*/
+export default function PagesForm({ item, handleAddAndModify }) {
   let defaultValues = {};
   if (item !== null) {
     defaultValues = {
@@ -28,7 +32,7 @@ export default function PagesForm({ item }) {
       hidden: "true",
     };
   }
-  const rainbow = [
+  const sections = [
     "section1",
     "section2",
     "section3",
@@ -51,7 +55,7 @@ export default function PagesForm({ item }) {
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues: defaultValues });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => handleAddAndModify(data);
   return (
     <div className="space-y-4 h-fit w-fit">
       {item !== null ? (
@@ -64,8 +68,20 @@ export default function PagesForm({ item }) {
         </span>
       )}
       <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
-        <Input label={"name"} register={register} />
-        <Input label={"link"} register={register} />
+        <Input
+          label={"name"}
+          register={register}
+          required={"Name is required"}
+        />
+        {errors.name && <Error message={errors.name.message} />}
+
+        <Input
+          label={"link"}
+          register={register}
+          required={"Link is required"}
+        />
+        {errors.link && <Error message={errors.link.message} />}
+
         <Select
           label={"Choose parent page"}
           name={"parentPage"}
@@ -74,7 +90,7 @@ export default function PagesForm({ item }) {
         />
         <MultipleCheckboxes
           name={"sections"}
-          options={rainbow}
+          options={sections}
           register={register}
         />
         <Fieldset legend="Should it be hidden?">

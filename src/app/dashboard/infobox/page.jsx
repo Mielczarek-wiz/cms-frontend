@@ -1,4 +1,5 @@
-import { TableDash } from "@/components/dashboardSide/TableDash";
+"use client";
+import PageComponent from "@/components/dashboardSide/PageComponent";
 
 export default function Infobox() {
   const header = ["ID", "Information", "Subinformation", "User", "Hidden"];
@@ -67,5 +68,7 @@ export default function Infobox() {
       hidden: true,
     },
   ];
-  return <TableDash header={header} rows={rows} form="Infoboxes" />;
+  return (
+    <PageComponent form={"Infoboxes"} header={header} initialRows={rows} />
+  );
 }
