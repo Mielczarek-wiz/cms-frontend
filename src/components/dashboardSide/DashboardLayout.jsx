@@ -1,4 +1,4 @@
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Disclosure, Menu } from "@headlessui/react";
 import Link from "next/link";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import classNames from "@/components/modules/classNames";

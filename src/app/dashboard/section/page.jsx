@@ -1,5 +1,6 @@
 "use client";
 import AddButton from "@/components/dashboardSide/AddButton";
+import PageComponent from "@/components/dashboardSide/PageComponent";
 import { TableDash } from "@/components/dashboardSide/TableDash";
 import FormPopup from "@/components/dashboardSide/forms/FormPopup";
 import { useState } from "react";
@@ -89,33 +90,5 @@ export default function Sections() {
       hidden: false,
     },
   ];
-  const handleDelete = async (id) => {
-    console.log(id);
-  };
-  const handleAddAndModify = async (data) => {
-    console.log(data);
-  };
-  const [popUp, setPopUp] = useState({
-    isOpen: false,
-    item: {},
-  });
-  return (
-    <>
-      <AddButton setPopUp={setPopUp} />
-      <TableDash
-        header={header}
-        rows={rows}
-        setPopUp={setPopUp}
-        handleDelete={handleDelete}
-      />
-      {popUp.isOpen ? (
-        <FormPopup
-          setPopUp={setPopUp}
-          form={"Sections"}
-          item={popUp.item}
-          handleAddAndModify={handleAddAndModify}
-        />
-      ) : null}
-    </>
-  );
+  return <PageComponent form={"Sections"} header={header} initialRows={rows} />;
 }

@@ -44,7 +44,7 @@ export const useCall = () => {
   return { call };
 };
 
-const handleError = (status, message, router) => {
+const handleError = (status, message, router = null) => {
   switch (status) {
     case 403:
       router.push("/login");

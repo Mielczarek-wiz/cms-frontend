@@ -1,20 +1,7 @@
 "use client";
-import AddButton from "@/components/dashboardSide/AddButton";
-import { TableDash } from "@/components/dashboardSide/TableDash";
-import FormPopup from "@/components/dashboardSide/forms/FormPopup";
-import { useState } from "react";
+import PageComponent from "@/components/dashboardSide/PageComponent";
 
 export default function Infobox() {
-  const handleDelete = async (id) => {
-    console.log(id);
-  };
-  const handleAddAndModify = async (data) => {
-    console.log(data);
-  };
-  const [popUp, setPopUp] = useState({
-    isOpen: false,
-    item: {},
-  });
   const header = ["ID", "Information", "Subinformation", "User", "Hidden"];
   const rows = [
     {
@@ -82,22 +69,6 @@ export default function Infobox() {
     },
   ];
   return (
-    <>
-      <AddButton setPopUp={setPopUp} />
-      <TableDash
-        header={header}
-        rows={rows}
-        setPopUp={setPopUp}
-        handleDelete={handleDelete}
-      />
-      {popUp.isOpen ? (
-        <FormPopup
-          setPopUp={setPopUp}
-          form={"Infoboxes"}
-          item={popUp.item}
-          handleAddAndModify={handleAddAndModify}
-        />
-      ) : null}
-    </>
+    <PageComponent form={"Infoboxes"} header={header} initialRows={rows} />
   );
 }
