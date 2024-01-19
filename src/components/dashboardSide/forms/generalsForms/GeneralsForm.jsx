@@ -3,6 +3,7 @@ import Fieldset from "../components/Fieldset";
 import Input from "../components/Input";
 import Radio from "../components/Radio";
 import Submit from "../components/Submit";
+import Error from "../components/Error";
 
 export default function GeneralsForm({ item, handleAddAndModify }) {
   let defaultValues = {};
@@ -39,9 +40,23 @@ export default function GeneralsForm({ item, handleAddAndModify }) {
         </span>
       )}
       <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
-        <Input label={"key"} register={register} />
-        <Input label={"value"} register={register} />
-        <Input label={"description"} register={register} />
+        <Input label={"key"} register={register} required={"Key is required"} />
+        {errors.key && <Error message={errors.key.message} />}
+
+        <Input
+          label={"value"}
+          register={register}
+          required={"Value is required"}
+        />
+        {errors.value && <Error message={errors.value.message} />}
+
+        <Input
+          label={"description"}
+          register={register}
+          required={"Description is required"}
+        />
+        {errors.description && <Error message={errors.description.message} />}
+
         <Fieldset legend="Should it be hidden?">
           <Radio value={true} register={register} group={"hidden"} />
           <Radio value={false} register={register} group={"hidden"} />

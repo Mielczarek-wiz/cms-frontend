@@ -63,9 +63,9 @@ export default function FormPopup({
   };
 
   return (
-    <div className="fixed top-0 left-0 z-50 w-[100dvw] h-[100dvh] bg-black bg-opacity-75">
+    <div className="fixed top-0 left-0 z-50 w-[100dvw] h-[100dvh] bg-black bg-opacity-75 p-2">
       <div className="flex flex-row items-center justify-center w-[100dvw] h-[100dvh] ">
-        <div className="relative z-50 max-h-screen p-8 overflow-x-hidden overflow-y-auto bg-white w-fit">
+        <div className="relative z-50 max-h-screen p-8 overflow-x-hidden overflow-y-auto rounded-lg bg-slate-100 w-fit">
           <button
             className="absolute p-1 bg-red-600 rounded top-2 right-2 hover:bg-red-800"
             onClick={() => setPopUp({ item: null, isOpen: false })}

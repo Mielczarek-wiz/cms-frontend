@@ -3,6 +3,7 @@ import Fieldset from "../components/Fieldset";
 import Radio from "../components/Radio";
 import Input from "../components/Input";
 import Submit from "../components/Submit";
+import Error from "../components/Error";
 
 export default function RolesForm({ item, handleAddAndModify }) {
   let defaultValues = {};
@@ -36,7 +37,13 @@ export default function RolesForm({ item, handleAddAndModify }) {
         </span>
       )}
       <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
-        <Input label={"name"} register={register} />
+        <Input
+          label={"name"}
+          register={register}
+          required={"Role name is required"}
+        />
+        {errors.name && <Error message={errors.name.message} />}
+
         <Fieldset legend="Should it be hidden?">
           <Radio value={true} register={register} group={"hidden"} />
           <Radio value={false} register={register} group={"hidden"} />

@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { getRoute } from "@/api/apiRoutes";
 import { useForm } from "react-hook-form";
 import { getNavigation } from "@/app/dashboard/routes/navigation";
+import Error from "../components/Error";
 
 export default function LoginForm() {
   const login = useUserStore((state) => state.login);
@@ -39,18 +40,15 @@ export default function LoginForm() {
         register={register}
         required={"Email is required"}
       />
-      {errors.email && (
-        <span className="text-red-500">{errors.email.message}</span>
-      )}
+      {errors.email && <Error message={errors.email.message} />}
       <Input
         label={"password"}
         register={register}
         type="password"
         required={"Password is required"}
       />
-      {errors.password && (
-        <span className="text-red-500">{errors.password.message}</span>
-      )}
+      {errors.password && <Error message={errors.password.message} />}
+
       <Submit />
     </form>
   );

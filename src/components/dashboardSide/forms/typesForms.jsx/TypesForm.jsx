@@ -3,6 +3,7 @@ import Input from "../components/Input";
 import Fieldset from "../components/Fieldset";
 import Radio from "../components/Radio";
 import Submit from "../components/Submit";
+import Error from "../components/Error";
 
 export default function TypesForm({ item, handleAddAndModify }) {
   let defaultValues = {};
@@ -35,7 +36,12 @@ export default function TypesForm({ item, handleAddAndModify }) {
         </span>
       )}
       <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
-        <Input label={"type"} register={register} />
+        <Input
+          label={"type"}
+          register={register}
+          required={"Type name is required"}
+        />
+        {errors.type && <Error message={errors.type.message} />}
         <Fieldset legend="Should it be hidden?">
           <Radio value={true} register={register} group={"hidden"} />
           <Radio value={false} register={register} group={"hidden"} />

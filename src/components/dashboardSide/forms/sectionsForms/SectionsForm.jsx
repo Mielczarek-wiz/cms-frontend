@@ -5,7 +5,11 @@ import Radio from "../components/Radio";
 import Select from "../components/Select";
 import Submit from "../components/Submit";
 import MultipleCheckboxes from "../components/MultipleCheckboxes";
+import Error from "../components/Error";
 
+/* 
+  Here you should do some fetching for "infoboxes" and "type" values.
+*/
 export default function SectionsForm({ item, handleAddAndModify }) {
   let defaultValues = {};
   if (item !== null) {
@@ -45,8 +49,14 @@ export default function SectionsForm({ item, handleAddAndModify }) {
         </span>
       )}
       <form className="space-y-2" onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          label={"title"}
+          register={register}
+          required={"Title is required"}
+        />
+        {errors.title && <Error message={errors.title.message} />}
+
         <Input label={"text"} register={register} />
-        <Input label={"title"} register={register} />
         <Input label={"subtitle"} register={register} />
         <Select
           label={"Choose type"}
