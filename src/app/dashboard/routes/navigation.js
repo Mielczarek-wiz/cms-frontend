@@ -8,3 +8,7 @@ export const navigation = [
   { name: "Users", href: "/dashboard", showForMod: false },
   { name: "Roles", href: "/dashboard/role", showForMod: false },
 ];
+
+export const getNavigation = (name) => {
+  return navigation.find((nav) => nav.name === name);
+};
