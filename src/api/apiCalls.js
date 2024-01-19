@@ -4,6 +4,7 @@ import { useCallback } from "react";
 import { mainUrl } from "./apiRoutes";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/zustand/useUserStore";
+import { toast } from "react-toastify";
 
 export const useCall = () => {
   const router = useRouter();
@@ -47,12 +48,14 @@ export const useCall = () => {
 const handleError = (status, message, router = null) => {
   switch (status) {
     case 403:
+      toast.error(message.message);
       router.push("/login");
       break;
     case 400:
-      console.log(message);
+      toast.error(message.message);
       break;
     default:
+      toast.error(message.message);
       break;
   }
 };

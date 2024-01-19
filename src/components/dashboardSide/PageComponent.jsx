@@ -5,6 +5,7 @@ import { TableDash } from "./TableDash";
 import FormPopup from "./forms/FormPopup";
 import { useCall } from "@/api/apiCalls";
 import { getRoute } from "@/api/apiRoutes";
+import { toast } from "react-toastify";
 import { useUserStore } from "@/zustand/useUserStore";
 
 export default function PageComponent({
@@ -24,21 +25,20 @@ export default function PageComponent({
   }, [form, call]);
 
   const handleDelete = async (id) => {
-    const res = await call("delete", getRoute(form) + `/${id}`, {}, true);
+    const data = { user: useUserStore.getState().user.email };
+    const res = await call("delete", getRoute(form) + `/${id}`, data, true);
+    toast.success(res.message);
     fetchData();
   };
   const handleAddAndModify = async (data) => {
+    let res = { message: null };
     data = { ...data, user: useUserStore.getState().user.email };
     if (popUp.item !== null) {
-      const res = await call(
-        "put",
-        getRoute(form) + `/${popUp.item.id}`,
-        data,
-        true
-      );
+      res = await call("put", getRoute(form) + `/${popUp.item.id}`, data, true);
     } else {
-      const res = await call("post", getRoute(form), data, true);
+      res = await call("post", getRoute(form), data, true);
     }
+    toast.success(res.message);
     setPopUp({ ...popUp, isOpen: false });
     fetchData();
   };
