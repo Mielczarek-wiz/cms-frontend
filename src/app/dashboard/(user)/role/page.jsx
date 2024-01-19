@@ -13,19 +13,27 @@ export default function Roles() {
   const [rows, setRows] = useState([]);
   const header = ["ID", "Name", "User", "Hidden"];
 
-  const redirectIfModerator = useCallback(() => {
-    if (user.role === "Moderator") {
+  const redirectIfModeratorOrNotLogged = useCallback(() => {
+    if (
+      user.role === "Moderator" ||
+      (user.role === null &&
+        user.name === null &&
+        user.email === null &&
+        user.token === null)
+    ) {
       router.push("/login");
     }
-  }, [user.role, router]);
+  }, [user.role, user.name, user.email, user.token, router]);
+
   const fetchData = useCallback(async () => {
     const res = await call("get", getRoute("roles"), {}, true);
     setRows(res);
   }, [call]);
 
   useEffect(() => {
-    redirectIfModerator();
+    redirectIfModeratorOrNotLogged();
     fetchData();
-  }, [fetchData, redirectIfModerator]);
+  }, [fetchData, redirectIfModeratorOrNotLogged]);
+
   return <PageComponent form={"Roles"} header={header} initialRows={rows} />;
 }

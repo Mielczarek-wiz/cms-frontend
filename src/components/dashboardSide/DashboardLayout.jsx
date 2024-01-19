@@ -5,10 +5,12 @@ import classNames from "@/components/modules/classNames";
 import { navigation } from "@/app/dashboard/routes/navigation";
 import { userNavigation } from "@/app/dashboard/routes/userNavigation";
 import { useUserStore } from "@/zustand/useUserStore";
+import { useRouter } from "next/navigation";
 
 export default function DashboardLayout({ current, handleSave }) {
   const user = useUserStore((state) => state.user);
   const logout = useUserStore((state) => state.logout);
+  const router = useRouter();
   return (
     <Disclosure
       as="nav"
