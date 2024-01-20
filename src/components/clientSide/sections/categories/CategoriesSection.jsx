@@ -33,12 +33,12 @@ export default function CategoriesSection() {
                 width="270"
                 height="300"
                 alt="property"
-                className="rounded-md p-2 hover:brightness-75 transition-full duration-500 hover:cursor-pointer"
+                className="rounded-md p-2 hover:brightness-75 transition-color duration-500 hover:cursor-pointer"
                 onClick={() => handleRedirectToProperty(item)}
               />
               <a
                 onClick={() => handleRedirectToProperty(item)}
-                className="text-neutral-900 hover:text-blue-500 transition-full duration-500 hover:cursor-pointer"
+                className="text-neutral-900 hover:text-blue-500 transition-color duration-500 hover:cursor-pointer"
               >
                 {item.text}
               </a>
@@ -47,8 +47,8 @@ export default function CategoriesSection() {
         })}
       </div>
       <button
-        onClick={() => handleViewAllPropertiesButton()}
-        className="bg-blue-500 hover:bg-neutral-800 text-white my-4 mx-auto py-3 px-8 rounded-md flex align-middle"
+        onClick={handleViewAllPropertiesButton}
+        className="bg-blue-500 hover:bg-neutral-800 text-white my-4 mx-auto py-3 px-8 rounded-md flex align-middle transition-colors duration-100"
       >
         VIEW ALL PROPERTIES
       </button>
