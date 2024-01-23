@@ -6,6 +6,7 @@ import Select from "../components/Select";
 import Submit from "../components/Submit";
 import MultipleCheckboxes from "../components/MultipleCheckboxes";
 import Error from "../components/Error";
+import { useUserStore } from "@/zustand/useUserStore";
 
 /* 
   Here you should do some fetching for "sections" and "page" values.
@@ -55,7 +56,7 @@ export default function PagesForm({ item, handleAddAndModify }) {
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues: defaultValues });
-  const onSubmit = async (data) => handleAddAndModify(data);
+  const onSubmit = async (data) => handleAddAndModify({...data, user: useUserStore.getState().user.email});
   return (
     <div className="space-y-4 h-fit w-fit">
       {item !== null ? (

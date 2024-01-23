@@ -4,12 +4,13 @@ import Fieldset from "../components/Fieldset";
 import Radio from "../components/Radio";
 import Submit from "../components/Submit";
 import Error from "../components/Error";
+import { useUserStore } from "@/zustand/useUserStore";
 
 export default function TypesForm({ item, handleAddAndModify }) {
   let defaultValues = {};
   if (item !== null) {
     defaultValues = {
-      type: item.type,
+      type: item.type.toString(),
       hidden: item.hidden.toString(),
     };
   } else {
@@ -23,7 +24,7 @@ export default function TypesForm({ item, handleAddAndModify }) {
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues: defaultValues });
-  const onSubmit = async (data) => handleAddAndModify(data);
+  const onSubmit = async (data) => handleAddAndModify({...data, user: useUserStore.getState().user.email});
   return (
     <div className="space-y-4 h-fit w-fit">
       {item !== null ? (

@@ -5,6 +5,7 @@ import Radio from "../components/Radio";
 import Submit from "../components/Submit";
 import InputFile from "../components/InputFile";
 import Error from "../components/Error";
+import { useUserStore } from "@/zustand/useUserStore";
 
 export default function SlidersForm({ item, handleAddAndModify }) {
   let defaultValues = {};
@@ -26,7 +27,7 @@ export default function SlidersForm({ item, handleAddAndModify }) {
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues: defaultValues });
-  const onSubmit = async (data) => handleAddAndModify(data);
+  const onSubmit = async (data) => handleAddAndModify({...data, user: useUserStore.getState().user.email});
   return (
     <div className="space-y-4 h-fit w-fit">
       {item !== null ? (

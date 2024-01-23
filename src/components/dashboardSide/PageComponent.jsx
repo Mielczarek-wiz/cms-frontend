@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useState } from "react";
+import { useCallback, useState,useEffect } from "react";
 import AddButton from "./AddButton";
 import { TableDash } from "./TableDash";
 import FormPopup from "./forms/FormPopup";
@@ -19,10 +19,14 @@ export default function PageComponent({
   });
   const { call } = useCall();
   const [rows, setRows] = useState(initialRows);
+
   const fetchData = useCallback(async () => {
     const res = await call("get", getRoute(form), {}, true);
     setRows(res);
   }, [form, call]);
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const handleDelete = async (id) => {
     const data = { user: useUserStore.getState().user.email };
@@ -30,13 +34,13 @@ export default function PageComponent({
     toast.success(res.message);
     fetchData();
   };
-  const handleAddAndModify = async (data) => {
+  const handleAddAndModify = async (data, isFile = false) => {
     let res = { message: null };
-    data = { ...data, user: useUserStore.getState().user.email };
+    //data = { ...data, user: useUserStore.getState().user.email };
     if (popUp.item !== null) {
-      res = await call("put", getRoute(form) + `/${popUp.item.id}`, data, true);
+      res = await call("put", getRoute(form) + `/${popUp.item.id}`, data, true, isFile);
     } else {
-      res = await call("post", getRoute(form), data, true);
+      res = await call("post", getRoute(form), data, true, isFile);
     }
     toast.success(res.message);
     setPopUp({ ...popUp, isOpen: false });

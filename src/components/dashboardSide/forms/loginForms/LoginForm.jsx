@@ -20,11 +20,11 @@ export default function LoginForm() {
     });
 
     login(res);
-    if (typeof window !== "undefined" && window.localStorage) {
-      router.push(getNavigation(localStorage.getItem("current")).href);
-    } else {
+    // if (typeof window !== "undefined" && window.localStorage) {
+    //   router.push(getNavigation(localStorage.getItem("current")).href);
+    // } else {
       router.push("/dashboard/general");
-    }
+    // }
   };
 
   const {
