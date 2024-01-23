@@ -27,7 +27,13 @@ export default function SlidersForm({ item, handleAddAndModify }) {
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues: defaultValues });
-  const onSubmit = async (data) => handleAddAndModify({...data, user: useUserStore.getState().user.email});
+  const onSubmit = async (data) => {
+    const formData = new FormData()
+    formData.append("photo", data.photo[0])
+    data = {...data, photo: data.photo[0].name, user: useUserStore.getState().user.email}
+    formData.append("slider", JSON.stringify(data))
+    handleAddAndModify(formData, true);
+  }
   return (
     <div className="space-y-4 h-fit w-fit">
       {item !== null ? (
