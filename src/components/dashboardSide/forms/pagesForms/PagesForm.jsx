@@ -7,56 +7,54 @@ import Submit from "../components/Submit";
 import MultipleCheckboxes from "../components/MultipleCheckboxes";
 import Error from "../components/Error";
 import { useUserStore } from "@/zustand/useUserStore";
+import { useCall } from "@/api/apiCalls";
+import { useState, useEffect, useCallback } from "react"; 
+import { getRoute } from "@/api/apiRoutes";
 
-/* 
-  Here you should do some fetching for "sections" and "page" values.
-*/
 export default function PagesForm({ item, handleAddAndModify }) {
+  const { call } = useCall();  
+  const [parentPages, setParentPages] = useState([]);
+  const [pageSections, setPageSections] = useState([]);
+  const fetchParentPage = useCallback(async () => {
+    const fetchedPages = await call("get", getRoute("pages"), {}, true);
+    setParentPages(fetchedPages.map((page) => (page.name)));
+  }, [call])
+  const fetchPageSections = useCallback(async () => {
+    const fetchedSections = await call("get", getRoute("sections"), {}, true);
+    setPageSections(fetchedSections.map((section) => (section.title)));
+  }, [call])
+  useEffect(() => {
+    fetchParentPage();
+    fetchPageSections();
+  }, [fetchParentPage, fetchPageSections])
   let defaultValues = {};
   if (item !== null) {
     defaultValues = {
       name: item.name,
       link: item.link,
-      page: item.page,
-      sections: [
-        "section1",
-        "section2",
-      ] /* We probably will send another request for that */,
+      parentPage: "",
+      sections: item.sections,
       hidden: item.hidden.toString(),
     };
   } else {
     defaultValues = {
       name: "",
       link: "",
+      parentPage: "",
       sections: [],
-      description: "",
       hidden: "true",
     };
   }
-  const sections = [
-    "section1",
-    "section2",
-    "section3",
-    "section4",
-    "section5",
-    "section6",
-    "section7",
-    "section8",
-    "section9",
-    "section10",
-    "section11",
-    "section12",
-    "section13",
-    "section14",
-    "section15",
-    "section16",
-  ];
+  console.log(item)
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues: defaultValues });
-  const onSubmit = async (data) => handleAddAndModify({...data, user: useUserStore.getState().user.email});
+  const onSubmit = async (data) => {
+    console.log(data)
+    handleAddAndModify({...data, user: useUserStore.getState().user.email});
+  }
   return (
     <div className="space-y-4 h-fit w-fit">
       {item !== null ? (
@@ -87,11 +85,11 @@ export default function PagesForm({ item, handleAddAndModify }) {
           label={"Choose parent page"}
           name={"parentPage"}
           register={register}
-          options={["page1", "page2"]}
+          options={parentPages}
         />
         <MultipleCheckboxes
           name={"sections"}
-          options={sections}
+          options={pageSections}
           register={register}
         />
         <Fieldset legend="Should it be hidden?">

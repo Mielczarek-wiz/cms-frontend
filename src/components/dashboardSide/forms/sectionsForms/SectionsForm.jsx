@@ -12,10 +12,6 @@ import { getRoute } from "@/api/apiRoutes";
 import { useUserStore } from "@/zustand/useUserStore";
 import { useEffect, useState, useCallback } from "react";
 
-/* 
-  Here you should do some fetching for "infoboxes" and "type" values.
-*/
-
 export default function SectionsForm({ item, handleAddAndModify }) {
   const { call } = useCall();  
   const [types, setTypes] = useState([]);
@@ -64,7 +60,6 @@ export default function SectionsForm({ item, handleAddAndModify }) {
     if(data.type === '') {
       data = {...data, type: types[0]}
     }
-    console.log("Date", data)
     formData.append("section", JSON.stringify(data))
     handleAddAndModify(formData, true);
   }
