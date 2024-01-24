@@ -10,14 +10,20 @@ export const useCall = () => {
   const router = useRouter();
 
   const call = useCallback(
-    async (method = "get", url = "", body = {}, withAuth = false) => {
+    async (method = "get", url = "", body = {}, withAuth = false, isFile = false) => {
       try {
         const options = {
           prefixUrl: mainUrl,
           method: method,
         };
         if (method !== "get") {
-          options.json = body;
+          if(isFile){
+            options.body = body;
+          }
+          else {
+            options.json = body;
+          }
+          
         }
         if (withAuth) {
           options.hooks = {

@@ -5,6 +5,7 @@ import InputFile from "../components/InputFile";
 import Radio from "../components/Radio";
 import Submit from "../components/Submit";
 import Error from "../components/Error";
+import { useUserStore } from "@/zustand/useUserStore";
 
 export default function InfoboxesForm({ item, handleAddAndModify }) {
   let defaultValues = {};
@@ -26,7 +27,14 @@ export default function InfoboxesForm({ item, handleAddAndModify }) {
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues: defaultValues });
-  const onSubmit = async (data) => handleAddAndModify(data);
+  const onSubmit = async (data) => {
+    const formData = new FormData()
+    formData.append("icon", data.icon[0])
+    data = {...data, icon: data.icon[0].name, user: useUserStore.getState().user.email}
+    formData.append("infobox", JSON.stringify(data))
+    handleAddAndModify(formData, true);
+  }
+
   return (
     <div className="space-y-4 h-fit w-fit">
       {item !== null ? (

@@ -4,6 +4,7 @@ import Radio from "../components/Radio";
 import Input from "../components/Input";
 import Submit from "../components/Submit";
 import Error from "../components/Error";
+import { useUserStore } from "@/zustand/useUserStore";
 
 export default function RolesForm({ item, handleAddAndModify }) {
   let defaultValues = {};
@@ -23,7 +24,7 @@ export default function RolesForm({ item, handleAddAndModify }) {
     handleSubmit,
     formState: { errors },
   } = useForm({ defaultValues: defaultValues });
-  const onSubmit = async (data) => handleAddAndModify(data);
+  const onSubmit = async (data) => handleAddAndModify({...data, user: useUserStore.getState().user.email});
 
   return (
     <div className="space-y-4 h-fit w-fit">

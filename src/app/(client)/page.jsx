@@ -12,7 +12,7 @@ import WhyPeopleChooseUsSection from "@/components/clientSide/sections/whyPeople
 export default function Home() {
   return (
     <section className="w-full h-screen">
-      <CategoriesSection/>
+      <BestOffersSection/>
     </section>
   )
 }
