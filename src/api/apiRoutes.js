@@ -11,6 +11,7 @@ const routes = {
   types: "section/type/secured",
   infoboxes: "section/infobox/secured",
   menu: "page/exposed/menu",
+  page: "page/exposed",
 };
 
 export const getRoute = (route) => {
