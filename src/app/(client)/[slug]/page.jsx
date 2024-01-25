@@ -16,7 +16,7 @@ import { useCallback, useEffect, useState } from "react";
 export default function Page({ params }) {
   const { call } = useCall();
   const [sections, setSections] = useState([]);
-  console.log(sections);
+
   const fetchPage = useCallback(async () => {
     const page = await call(
       "get",
@@ -25,6 +25,7 @@ export default function Page({ params }) {
       false,
       false
     );
+    console.log(page);
     setSections(page.sections);
   }, [call, params.slug]);
   useEffect(() => {
