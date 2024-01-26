@@ -46,13 +46,13 @@ export default function TestimonialsSection() {
   //End of that, returning to usual Next.js stuff
 
   return (
-    <div>
-      <p className="text-3xl text-neutral-900 flex text-center justify-center">
+    <section>
+      <h1 className="flex justify-center text-3xl text-center text-neutral-900">
         TESTIMONIALS
-      </p>
-      <div className="embla mx-0 md:mx-32 py-4">
-        <div className="embla__viewport overflow-hidden" ref={emblaRef}>
-          <div className="embla__container flex">
+      </h1>
+      <div className="py-4 mx-0 embla md:mx-32">
+        <div className="overflow-hidden embla__viewport" ref={emblaRef}>
+          <div className="flex embla__container">
             {testimonialsMock.map((item) => {
               return (
                 <div
@@ -65,17 +65,17 @@ export default function TestimonialsSection() {
                       width="50"
                       height="50"
                       alt="person"
-                      className="rounded-full mr-6 mb-6"
+                      className="mb-6 mr-6 rounded-full"
                     />
                     <div>
-                      <p className="text-neutral-900 text-2xl">
+                      <p className="text-2xl text-neutral-900">
                         {item.clientName}
                       </p>
                       <p className="text-neutral-600">{item.clientType}</p>
                     </div>
                   </div>
                   <div>
-                    <p className="text-neutral-500 font-thin">
+                    <p className="font-thin text-neutral-500">
                       {item.testimonialText}
                     </p>
                   </div>
@@ -85,7 +85,7 @@ export default function TestimonialsSection() {
           </div>
         </div>
       </div>
-      <div className="embla__navigator flex justify-center items-center mt-4">
+      <div className="flex items-center justify-center mt-4 embla__navigator">
         {scrollSnaps.map((_, index) => (
           <div
             className={`embla__dot block ${
@@ -99,6 +99,6 @@ export default function TestimonialsSection() {
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 }

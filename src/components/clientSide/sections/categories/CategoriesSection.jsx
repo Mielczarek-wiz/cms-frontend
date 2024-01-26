@@ -13,18 +13,18 @@ function handleViewAllPropertiesButton() {
 
 export default function CategoriesSection() {
   return (
-    <div className="mx-0 md:mx-32 py-4">
-      <div className="w-1/2 flex flex-col justify-center items-center mx-auto">
-        <p className="text-3xl text-neutral-900 flex text-center justify-center pb-4">
+    <section className="py-4 mx-0 md:mx-32">
+      <div className="flex flex-col items-center justify-center w-1/2 mx-auto">
+        <p className="flex justify-center pb-4 text-3xl text-center text-neutral-900">
           RESIDENTIAL PROPERTY CATEGORIES
         </p>
-        <p className="text-neutral-400 flex text-center justify-center">
+        <p className="flex justify-center text-center text-neutral-400">
           At our agency, we work with various types of residential real estate
           property. You can find out more about our properties by browsing our
           website. {/*replace later*/}
         </p>
       </div>
-      <div className="grid gird-col2-1 md:grid-cols-2 lg:grid-cols-4 justify-center my-8">
+      <div className="grid justify-center my-8 gird-col2-1 md:grid-cols-2 lg:grid-cols-4">
         {categoriesMock.map((item) => {
           return (
             <div key={item.id} className="flex flex-col">
@@ -33,12 +33,12 @@ export default function CategoriesSection() {
                 width="270"
                 height="300"
                 alt="property"
-                className="rounded-md p-2 hover:brightness-75 transition-color duration-500 hover:cursor-pointer"
+                className="p-2 duration-500 rounded-md hover:brightness-75 transition-color hover:cursor-pointer"
                 onClick={() => handleRedirectToProperty(item)}
               />
               <a
                 onClick={() => handleRedirectToProperty(item)}
-                className="text-neutral-900 hover:text-blue-500 transition-color duration-500 hover:cursor-pointer"
+                className="duration-500 text-neutral-900 hover:text-blue-500 transition-color hover:cursor-pointer"
               >
                 {item.text}
               </a>
@@ -48,10 +48,10 @@ export default function CategoriesSection() {
       </div>
       <button
         onClick={handleViewAllPropertiesButton}
-        className="bg-blue-500 hover:bg-neutral-800 text-white my-4 mx-auto py-3 px-8 rounded-md flex align-middle transition-colors duration-100"
+        className="flex px-8 py-3 mx-auto my-4 text-white align-middle transition-colors duration-100 bg-blue-500 rounded-md hover:bg-neutral-800"
       >
         VIEW ALL PROPERTIES
       </button>
-    </div>
+    </section>
   );
 }

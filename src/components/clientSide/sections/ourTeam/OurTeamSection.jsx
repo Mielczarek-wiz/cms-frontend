@@ -4,38 +4,38 @@ import { ourTeamMock } from "./mock.js";
 import Image from "next/image.js";
 
 function handleGoToPerson(item) {
-  alert("TODO")
+  alert("TODO");
 }
 
 function handleCallPhone(item) {
-  phone = item.phone
-  alert("TODO")
+  phone = item.phone;
+  alert("TODO");
 }
 
 export default function OurTeamSection() {
   const maxItems = 4; //pretty sure we need to replace that kek
   let index = 0;
   return (
-    <div className="bg-slate-100">
-      <p className="text-3xl text-neutral-900 flex text-center justify-center">
+    <section className="bg-slate-100">
+      <h1 className="flex justify-center text-3xl text-center text-neutral-900">
         OUR TEAM
-      </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 mx-0 md:mx-32 py-4">
+      </h1>
+      <div className="grid grid-cols-1 py-4 mx-0 md:grid-cols-2 md:mx-32">
         {ourTeamMock.map((item) => {
           index += 1;
           return index <= maxItems ? (
-            <div key={item.id} className="p-8 flex items-start">
+            <div key={item.id} className="flex items-start p-8">
               <Image
                 src={item.photo}
                 width="170"
                 height="172"
                 alt="teammate"
-                className="rounded-md flex align-middle"
+                className="flex align-middle rounded-md"
               />
-              <div className="ml-4 pr-4">
+              <div className="pr-4 ml-4">
                 <a
                   onClick={(item) => handleGoToPerson(item)}
-                  className="text-xl text-neutral-900 hover:text-blue-500 transition-all duration-500"
+                  className="text-xl transition-all duration-500 text-neutral-900 hover:text-blue-500"
                 >
                   {item.name}
                 </a>
@@ -43,8 +43,8 @@ export default function OurTeamSection() {
                 <div className="flex py-4">
                   <Image src="phone.svg" alt="phone" width="20" height="20" />
                   <a
-                    onClick = {(item) => handleCallPhone(item)}
-                    className="pl-4 text-neutral-900 hover:text-blue-500 transition-all duration-500"
+                    onClick={(item) => handleCallPhone(item)}
+                    className="pl-4 transition-all duration-500 text-neutral-900 hover:text-blue-500"
                   >
                     {item.phone}
                   </a>
@@ -55,6 +55,6 @@ export default function OurTeamSection() {
           ) : null;
         })}
       </div>
-    </div>
+    </section>
   );
 }

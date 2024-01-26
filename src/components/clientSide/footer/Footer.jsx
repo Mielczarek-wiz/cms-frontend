@@ -5,7 +5,7 @@ import Menu from "../menu/Menu";
 
 export default function Footer() {
   return (
-    <footer className="p-8 bg-neutral-800">
+    <footer className="w-screen p-8 bg-neutral-800 h-fit">
       <div className="">
         {generalLayoutMock.map((item) => {
           return item.key === "aboutUsTitle" ? (

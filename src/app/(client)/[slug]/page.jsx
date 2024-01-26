@@ -25,15 +25,44 @@ export default function Page({ params }) {
       false,
       false
     );
-    console.log(page);
     setSections(page.sections);
   }, [call, params.slug]);
   useEffect(() => {
     fetchPage();
   }, [fetchPage]);
+
+  const renderSection = (section) => {
+    switch (section.type.toLowerCase()) {
+      case "mainslider":
+        return <MainSliderSection section={section} />;
+      case "whoweare":
+        return <WhoWeAreSection section={section} />;
+      case "whyus":
+        return <WhyPeopleChooseUsSection section={section} />;
+      case "categories":
+        return <CategoriesSection section={section} />;
+      case "infoboxes":
+        return <InfoboxesSection section={section} />;
+      case "bestoffers":
+        return <BestOffersSection section={section} />;
+      case "popularproperties":
+        return <PopularPropertiesSection section={section} />;
+      case "testimonials":
+        return <TestimonialsSection section={section} />;
+      case "ourteam":
+        return <OurTeamSection section={section} />;
+      case "contact":
+        return <ContactSection section={section} />;
+      default:
+        return null;
+    }
+  };
+  console.log(sections);
   return (
-    <section className="w-full h-screen">
-      <OurTeamSection />
-    </section>
+    <div className="w-full h-fit">
+      {sections.map((section, index) => (
+        <div key={index}>{renderSection(section)}</div>
+      ))}
+    </div>
   );
 }

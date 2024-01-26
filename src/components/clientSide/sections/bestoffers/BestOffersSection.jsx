@@ -1,5 +1,5 @@
 "use client";
-import {bestOffersMock} from "./mock.js";
+import { bestOffersMock } from "./mock.js";
 
 function handleSeeBestOffers() {
   alert("TODO");
@@ -7,18 +7,22 @@ function handleSeeBestOffers() {
 
 export default function BestOffersSection() {
   return (
-    <div className="bg-[url('/images/best-offers-bg-1807-526.png')]">
-      <div className="py-20 mx-auto flex flex-col justify-center items-center w-2/5">
-        <p className="text-white text-4xl m-3 text-center">{bestOffersMock.title}</p>
-        <p className="text-white text-xl m-3 text-center">{bestOffersMock.subtitle}</p>
-        <p className="text-white m-3 text-center">{bestOffersMock.text}</p>
+    <section className="bg-[url('/images/best-offers-bg-1807-526.png')]">
+      <div className="flex flex-col items-center justify-center w-2/5 py-20 mx-auto">
+        <h1 className="m-3 text-4xl text-center text-white">
+          {bestOffersMock.title}
+        </h1>
+        <h2 className="m-3 text-xl text-center text-white">
+          {bestOffersMock.subtitle}
+        </h2>
+        <p className="m-3 text-center text-white">{bestOffersMock.text}</p>
         <button
-          className="m-3 bg-white py-3 px-10 rounded-md hover:bg-blue-500 transition-full duration-500"
+          className="px-10 py-3 m-3 duration-500 bg-white rounded-md hover:bg-blue-500 transition-full"
           onClick={handleSeeBestOffers}
         >
           READ MORE
         </button>
       </div>
-    </div>
+    </section>
   );
 }
