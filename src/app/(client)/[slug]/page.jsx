@@ -57,7 +57,6 @@ export default function Page({ params }) {
         return null;
     }
   };
-  console.log(sections);
   return (
     <div className="w-full h-fit">
       {sections.map((section, index) => (
