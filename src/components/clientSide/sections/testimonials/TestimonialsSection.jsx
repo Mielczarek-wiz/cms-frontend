@@ -5,9 +5,9 @@ import { useRef } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { useState, useCallback, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { testimonialsMock } from "./mock.js";
+import { convertToImage } from "@/components/modules/convertToImage.js";
 
-export default function TestimonialsSection() {
+export default function TestimonialsSection({ section }) {
   //All the stuff needed for the carousel to function
   const autoplay = useRef(
     Autoplay(
@@ -46,37 +46,37 @@ export default function TestimonialsSection() {
   //End of that, returning to usual Next.js stuff
 
   return (
-    <div>
-      <p className="text-3xl text-neutral-900 flex text-center justify-center">
-        TESTIMONIALS
-      </p>
-      <div className="embla mx-0 md:mx-32 py-4">
-        <div className="embla__viewport overflow-hidden" ref={emblaRef}>
-          <div className="embla__container flex">
-            {testimonialsMock.map((item) => {
+    <section>
+      <h1 className="flex justify-center text-3xl text-center text-neutral-900">
+        {section.title}
+      </h1>
+      <div className="py-4 mx-0 embla md:mx-32">
+        <div className="overflow-hidden embla__viewport" ref={emblaRef}>
+          <div className="flex embla__container">
+            {section.infoboxes.map((item) => {
               return (
                 <div
-                  className="embla__slide flex flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_34%] flex-col p-4 bg-[url('/images/best-offers-bg-1807-526.png')]"
+                  className="embla__slide flex flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_34%] flex-col p-4 bg-white"
                   key={item.id}
                 >
                   <div className="flex">
                     <Image
-                      src={item.photo}
-                      width="50"
-                      height="50"
+                      src={convertToImage(item.image)}
+                      width={50}
+                      height={50}
                       alt="person"
-                      className="rounded-full mr-6 mb-6"
+                      className="mb-6 mr-6 rounded-full"
                     />
                     <div>
-                      <p className="text-neutral-900 text-2xl">
-                        {item.clientName}
+                      <p className="text-2xl text-neutral-900">
+                        {item.information}
                       </p>
-                      <p className="text-neutral-600">{item.clientType}</p>
+                      <p className="text-neutral-600">Regular Client</p>
                     </div>
                   </div>
                   <div>
-                    <p className="text-neutral-500 font-thin">
-                      {item.testimonialText}
+                    <p className="font-thin text-neutral-500">
+                      {item.subinformation}
                     </p>
                   </div>
                 </div>
@@ -85,7 +85,7 @@ export default function TestimonialsSection() {
           </div>
         </div>
       </div>
-      <div className="embla__navigator flex justify-center items-center mt-4">
+      <div className="flex items-center justify-center mt-4 embla__navigator">
         {scrollSnaps.map((_, index) => (
           <div
             className={`embla__dot block ${
@@ -99,6 +99,6 @@ export default function TestimonialsSection() {
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 }

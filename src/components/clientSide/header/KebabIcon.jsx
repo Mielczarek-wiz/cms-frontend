@@ -1,11 +1,4 @@
-import Button from "../buttons/Button";
-import Address from "./Address";
-
-export default function KebabIcon({children}) {
-  const wtf = () => {
-    console.log("hej");
-  };
-
+export default function KebabIcon({ children }) {
   return (
     <div
       id="container"

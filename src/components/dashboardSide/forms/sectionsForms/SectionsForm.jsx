@@ -13,21 +13,21 @@ import { useUserStore } from "@/zustand/useUserStore";
 import { useEffect, useState, useCallback } from "react";
 
 export default function SectionsForm({ item, handleAddAndModify }) {
-  const { call } = useCall();  
+  const { call } = useCall();
   const [types, setTypes] = useState([]);
   const [infoboxes, setInfoboxes] = useState([]);
   const fetchTypes = useCallback(async () => {
     const fetchedTypes = await call("get", getRoute("types"), {}, true);
-    setTypes(fetchedTypes.map((type) => (type.type)));
-  }, [call])
+    setTypes(fetchedTypes.map((type) => type.type));
+  }, [call]);
   const fetchInfoboxes = useCallback(async () => {
     const fetchedInfoboxes = await call("get", getRoute("infoboxes"), {}, true);
-    setInfoboxes(fetchedInfoboxes.map((infobox) => (infobox.information)));
-  }, [call])
+    setInfoboxes(fetchedInfoboxes.map((infobox) => infobox.information));
+  }, [call]);
   useEffect(() => {
     fetchTypes();
     fetchInfoboxes();
-  }, [fetchTypes, fetchInfoboxes])
+  }, [fetchTypes, fetchInfoboxes]);
   let defaultValues = {};
   if (item !== null) {
     defaultValues = {
@@ -54,15 +54,28 @@ export default function SectionsForm({ item, handleAddAndModify }) {
     formState: { errors },
   } = useForm({ defaultValues: defaultValues });
   const onSubmit = async (data) => {
-    const formData = new FormData()
-      formData.append("image", data.image[0])
-      data = {...data, image: data.image[0].name, user: useUserStore.getState().user.email}
-    if(data.type === '') {
-      data = {...data, type: types[0]}
+    const formData = new FormData();
+    if (data.image.length > 0) {
+      formData.append("image", data.image[0]);
+      data = {
+        ...data,
+        image: data.image[0].name,
+      };
+    } else {
+      formData.append("image", null);
+      data = {
+        ...data,
+        image: "",
+      };
     }
-    formData.append("section", JSON.stringify(data))
+    if (data.type === "") {
+      data = { ...data, type: types[0] };
+    }
+    data = { ...data, user: useUserStore.getState().user.email };
+    formData.append("section", JSON.stringify(data));
+    console.log(data);
     handleAddAndModify(formData, true);
-  }
+  };
   return (
     <div className="space-y-4 h-fit w-fit">
       {item !== null ? (
@@ -81,13 +94,10 @@ export default function SectionsForm({ item, handleAddAndModify }) {
           required={"Title is required"}
         />
         {errors.title && <Error message={errors.title.message} />}
-
-        <Input label={"text"} register={register} />
         <Input label={"subtitle"} register={register} />
-        <InputFile
-          label={"image"}
-          register={register}
-        />
+        <Input label={"text"} register={register} />
+
+        <InputFile label={"image"} register={register} />
         <Select
           label={"Choose type"}
           name={"type"}

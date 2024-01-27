@@ -6,19 +6,22 @@ import Submit from "../components/Submit";
 import InputFile from "../components/InputFile";
 import Error from "../components/Error";
 import { useUserStore } from "@/zustand/useUserStore";
+import { sub } from "date-fns";
 
 export default function SlidersForm({ item, handleAddAndModify }) {
   let defaultValues = {};
   if (item !== null) {
     defaultValues = {
-      text: item.text,
       title: item.title,
+      subtitle: item.subtitle,
+      text: item.text,
       hidden: item.hidden.toString(),
     };
   } else {
     defaultValues = {
-      text: "",
       title: "",
+      subtitle: "",
+      text: "",
       hidden: "true",
     };
   }
@@ -28,12 +31,16 @@ export default function SlidersForm({ item, handleAddAndModify }) {
     formState: { errors },
   } = useForm({ defaultValues: defaultValues });
   const onSubmit = async (data) => {
-    const formData = new FormData()
-    formData.append("photo", data.photo[0])
-    data = {...data, photo: data.photo[0].name, user: useUserStore.getState().user.email}
-    formData.append("slider", JSON.stringify(data))
+    const formData = new FormData();
+    formData.append("photo", data.photo[0]);
+    data = {
+      ...data,
+      photo: data.photo[0].name,
+      user: useUserStore.getState().user.email,
+    };
+    formData.append("slider", JSON.stringify(data));
     handleAddAndModify(formData, true);
-  }
+  };
   return (
     <div className="space-y-4 h-fit w-fit">
       {item !== null ? (
@@ -50,6 +57,12 @@ export default function SlidersForm({ item, handleAddAndModify }) {
           label={"title"}
           register={register}
           required={"Title is required"}
+        />
+        {errors.title && <Error message={errors.title.message} />}
+        <Input
+          label={"subtitle"}
+          register={register}
+          required={"Subtitle is required"}
         />
         {errors.title && <Error message={errors.title.message} />}
         <Input label={"text"} register={register} />

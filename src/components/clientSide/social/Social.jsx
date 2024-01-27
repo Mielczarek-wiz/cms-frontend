@@ -1,11 +1,41 @@
+import { useCall } from "@/api/apiCalls";
+import { getRoute } from "@/api/apiRoutes";
 import Image from "next/image";
+import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
+import { convertToImage } from "@/components/modules/convertToImage";
 
-export default function Social() {
-    return <div className="flex flex-row justify-around w-1/5">
-        <Image src="/facebook.svg" alt="facebook" width={25} height={25} />
-        <Image src="/twitter.svg" alt="twitter" width={25} height={25} />
-        <Image src="/instagram.svg" alt="instagram" width={25} height={25} />
-        <Image src="/google.svg" alt="google" width={25} height={25} />
-        <Image src="/linkedin.svg" alt="linkedin" width={25} height={25} />
+export default function Social({ socialsLink }) {
+  const { call } = useCall();
+  const [socials, setSocials] = useState([]);
+  const fetchSocials = useCallback(async () => {
+    const socials = await call(
+      "get",
+      getRoute("socials") + "/" + socialsLink,
+      {},
+      false,
+      false
+    );
+    setSocials(socials);
+  }, [call, socialsLink]);
+  useEffect(() => {
+    fetchSocials();
+  }, [fetchSocials]);
+  return (
+    <div className="flex flex-row items-center justify-around w-4/5 md:w-3/5 lg:w-1/5">
+      {socials.map((social) => (
+        <Link href={social.subinformation} key={social.id}>
+          <Image
+            src={convertToImage(social.image)}
+            alt={social.information}
+            width={25}
+            height={25}
+          />
+        </Link>
+      ))}
     </div>
+  );
 }
+/*
+
+*/
