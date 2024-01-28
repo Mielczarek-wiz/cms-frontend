@@ -92,7 +92,7 @@ export default function TestimonialsSection({ section }) {
               selectedIndex === index
                 ? "bg-blue-500 h-4 w-4 mx-4"
                 : "bg-neutral-200 h-2 w-2 mx-5 hover:bg-blue-500 hover:h-4 hover:w-4 hover:mx-4"
-            } transition-all duration-200 rounded-full
+            } transition-transform duration-200 rounded-full
             my-0`}
             key={index}
             onClick={() => scrollTo(index)}

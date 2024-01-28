@@ -8,18 +8,20 @@ export default function WhyPeopleChooseUsSection({ section }) {
         <h1 className="pb-6 text-4xl">{section.title}</h1>
         <p className="font-thin text-neutral-500">{section.text}</p>
       </div>
-      <div className="flex justify-between">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {section.infoboxes.map((item) => {
           return (
-            <div key={item.id} className="flex flex-col items-center mx-20">
-              <Image
-                src={convertToImage(item.image)}
-                width="30"
-                height="30"
-                alt="icon"
-                className="flex pb-4"
-              />
-              <p className="pb-4 text-5xl text-neutral-800">
+            <div key={item.id} className="flex flex-col items-center mx-20 pb-10">
+              <div className="w-12 h-12">
+                <Image
+                  src={convertToImage(item.image)}
+                  width={30}
+                  height={30}
+                  alt="icon"
+                  className="flex pb-4"
+                />
+              </div>
+              <p className="pb-4 text-3xl text-neutral-800">
                 {item.subinformation}
               </p>
               <p className="whitespace-pre text-neutral-500">
