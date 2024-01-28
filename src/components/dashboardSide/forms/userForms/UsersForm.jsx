@@ -10,33 +10,23 @@ export default function UsersForm({
   item,
   handleAddAndModify = handleAddAndModify,
 }) {
-  let defaultValues = {};
-  if (item !== null) {
-    defaultValues = {
-      name: item.name,
-      surname: item.surname,
-      email: item.email,
-      password: "",
-      confirmPassword: "",
-      role: item.role,
-    };
-  } else {
-    defaultValues = {
-      name: "",
-      surname: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      role: "Moderator",
-    };
-  }
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm({ defaultValues: defaultValues });
-  const onSubmit = async (data) => handleAddAndModify({...data, user: useUserStore.getState().user.email});
+  } = useForm({
+    defaultValues: {
+      name: item ? item.name : "",
+      surname: item ? item.surname : "",
+      email: item ? item.email : "",
+      password: "",
+      confirmPassword: "",
+      role: item ? item.role : "Moderator",
+    },
+  });
+  const onSubmit = async (data) =>
+    handleAddAndModify({ ...data, user: useUserStore.getState().user.email });
   return (
     <div className="space-y-4 h-fit w-fit">
       {item !== null ? (

@@ -6,6 +6,7 @@ const routes = {
   roles: "user/role",
   generals: "general/secured",
   pages: "page/secured",
+  parentpages: "page/secured/parent-pages",
   sliders: "slider/secured",
   sections: "section/secured",
   types: "section/type/secured",

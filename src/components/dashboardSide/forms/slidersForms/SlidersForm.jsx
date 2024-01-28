@@ -6,30 +6,20 @@ import Submit from "../components/Submit";
 import InputFile from "../components/InputFile";
 import Error from "../components/Error";
 import { useUserStore } from "@/zustand/useUserStore";
-import { sub } from "date-fns";
 
 export default function SlidersForm({ item, handleAddAndModify }) {
-  let defaultValues = {};
-  if (item !== null) {
-    defaultValues = {
-      title: item.title,
-      subtitle: item.subtitle,
-      text: item.text,
-      hidden: item.hidden.toString(),
-    };
-  } else {
-    defaultValues = {
-      title: "",
-      subtitle: "",
-      text: "",
-      hidden: "true",
-    };
-  }
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: defaultValues });
+  } = useForm({
+    defaultValues: {
+      title: item ? item.title : "",
+      subtitle: item ? item.subtitle : "",
+      text: item ? item.text : "",
+      hidden: item ? item.hidden.toString() : "true",
+    },
+  });
   const onSubmit = async (data) => {
     const formData = new FormData();
     formData.append("photo", data.photo[0]);

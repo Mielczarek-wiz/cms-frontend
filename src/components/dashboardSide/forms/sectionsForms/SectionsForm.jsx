@@ -16,6 +16,22 @@ export default function SectionsForm({ item, handleAddAndModify }) {
   const { call } = useCall();
   const [types, setTypes] = useState([]);
   const [infoboxes, setInfoboxes] = useState([]);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      text: item ? item.text : "",
+      title: item ? item.title : "",
+      subtitle: item ? item.subtitle : "",
+      type: item ? item.type : "",
+      infoboxes: item ? item.infoboxes : [],
+      hidden: item ? item.hidden.toString() : "true",
+    },
+  });
+
   const fetchTypes = useCallback(async () => {
     const fetchedTypes = await call("get", getRoute("types"), {}, true);
     setTypes(fetchedTypes.map((type) => type.type));
@@ -24,35 +40,13 @@ export default function SectionsForm({ item, handleAddAndModify }) {
     const fetchedInfoboxes = await call("get", getRoute("infoboxes"), {}, true);
     setInfoboxes(fetchedInfoboxes.map((infobox) => infobox.information));
   }, [call]);
+
   useEffect(() => {
     fetchTypes();
     fetchInfoboxes();
-  }, [fetchTypes, fetchInfoboxes]);
-  let defaultValues = {};
-  if (item !== null) {
-    defaultValues = {
-      text: item.text,
-      title: item.title,
-      subtitle: item.subtitle,
-      type: item.type,
-      infoboxes: item.infoboxes,
-      hidden: item.hidden.toString(),
-    };
-  } else {
-    defaultValues = {
-      text: "",
-      title: "",
-      subtitle: "",
-      type: types[0],
-      infoboxes: [],
-      hidden: "true",
-    };
-  }
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ defaultValues: defaultValues });
+    setValue("type", item ? item.type : types[0]);
+  }, [fetchTypes, fetchInfoboxes, item, setValue, types]);
+
   const onSubmit = async (data) => {
     const formData = new FormData();
     if (data.image.length > 0) {
@@ -68,12 +62,8 @@ export default function SectionsForm({ item, handleAddAndModify }) {
         image: "",
       };
     }
-    if (data.type === "") {
-      data = { ...data, type: types[0] };
-    }
     data = { ...data, user: useUserStore.getState().user.email };
     formData.append("section", JSON.stringify(data));
-    console.log(data);
     handleAddAndModify(formData, true);
   };
   return (
@@ -103,6 +93,7 @@ export default function SectionsForm({ item, handleAddAndModify }) {
           name={"type"}
           register={register}
           options={types}
+          defaultValue={item ? item.type : ""}
         />
         <MultipleCheckboxes
           name="infoboxes"
