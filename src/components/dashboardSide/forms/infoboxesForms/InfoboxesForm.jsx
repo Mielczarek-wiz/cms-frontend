@@ -6,6 +6,7 @@ import Radio from "../components/Radio";
 import Submit from "../components/Submit";
 import Error from "../components/Error";
 import { useUserStore } from "@/zustand/useUserStore";
+import Textarea from "../components/Textarea";
 
 export default function InfoboxesForm({ item, handleAddAndModify }) {
   const {
@@ -49,7 +50,7 @@ export default function InfoboxesForm({ item, handleAddAndModify }) {
           required={"Information is required"}
         />
         {errors.information && <Error message={errors.information.message} />}
-        <Input
+        <Textarea
           label={"subinformation"}
           register={register}
           required={"Subinformation is required"}

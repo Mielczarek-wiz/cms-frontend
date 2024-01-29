@@ -11,6 +11,7 @@ import Error from "../components/Error";
 import { getRoute } from "@/api/apiRoutes";
 import { useUserStore } from "@/zustand/useUserStore";
 import { useEffect, useState, useCallback } from "react";
+import Textarea from "../components/Textarea";
 
 export default function SectionsForm({ item, handleAddAndModify }) {
   const { call } = useCall();
@@ -85,7 +86,7 @@ export default function SectionsForm({ item, handleAddAndModify }) {
         />
         {errors.title && <Error message={errors.title.message} />}
         <Input label={"subtitle"} register={register} />
-        <Input label={"text"} register={register} />
+        <Textarea label={"text"} register={register} />
 
         <InputFile label={"image"} register={register} />
         <Select

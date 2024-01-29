@@ -6,6 +6,7 @@ import Submit from "../components/Submit";
 import InputFile from "../components/InputFile";
 import Error from "../components/Error";
 import { useUserStore } from "@/zustand/useUserStore";
+import Textarea from "../components/Textarea";
 
 export default function SlidersForm({ item, handleAddAndModify }) {
   const {
@@ -55,7 +56,7 @@ export default function SlidersForm({ item, handleAddAndModify }) {
           required={"Subtitle is required"}
         />
         {errors.title && <Error message={errors.title.message} />}
-        <Input label={"text"} register={register} />
+        <Textarea label={"text"} register={register} />
 
         <InputFile
           label={"photo"}

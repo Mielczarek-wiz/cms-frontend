@@ -10,20 +10,24 @@ export const useCall = () => {
   const router = useRouter();
 
   const call = useCallback(
-    async (method = "get", url = "", body = {}, withAuth = false, isFile = false) => {
+    async (
+      method = "get",
+      url = "",
+      body = {},
+      withAuth = false,
+      isFile = false
+    ) => {
       try {
         const options = {
           prefixUrl: mainUrl,
           method: method,
         };
         if (method !== "get") {
-          if(isFile){
+          if (isFile) {
             options.body = body;
-          }
-          else {
+          } else {
             options.json = body;
           }
-          
         }
         if (withAuth) {
           options.hooks = {
@@ -38,7 +42,9 @@ export const useCall = () => {
           };
         }
         const res = await ky(url, options);
+
         const data = await res.json();
+
         return data;
       } catch (error) {
         const message = await error.response?.json();

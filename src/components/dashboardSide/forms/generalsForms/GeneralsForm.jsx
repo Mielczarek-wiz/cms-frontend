@@ -5,6 +5,7 @@ import Radio from "../components/Radio";
 import Submit from "../components/Submit";
 import Error from "../components/Error";
 import { useUserStore } from "@/zustand/useUserStore";
+import Textarea from "../components/Textarea";
 
 export default function GeneralsForm({ item, handleAddAndModify }) {
   const {
@@ -44,8 +45,7 @@ export default function GeneralsForm({ item, handleAddAndModify }) {
           required={"Value is required"}
         />
         {errors.value && <Error message={errors.value.message} />}
-
-        <Input
+        <Textarea
           label={"description"}
           register={register}
           required={"Description is required"}
