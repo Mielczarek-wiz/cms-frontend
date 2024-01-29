@@ -20,12 +20,8 @@ export default function LoginForm() {
     });
 
     login(res);
-    if (typeof window !== "undefined" && window.localStorage) {
-      router.push(getNavigation(localStorage.getItem("current")).href);
-    } else {
-      localStorage.setItem("current", navigation[0].name);
-      router.push(navigation[0].href);
-    }
+    localStorage.setItem("current", navigation[0].name);
+    router.push(navigation[0].href);
   };
 
   const {
