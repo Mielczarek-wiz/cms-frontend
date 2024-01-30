@@ -35,11 +35,19 @@ export default function SectionsForm({ item, handleAddAndModify }) {
 
   const fetchTypes = useCallback(async () => {
     const fetchedTypes = await call("get", getRoute("types"), {}, true);
-    setTypes(fetchedTypes.map((type) => type.type));
+    setTypes(
+      fetchedTypes !== null && fetchedTypes !== undefined
+        ? fetchedTypes.map((type) => type.type)
+        : []
+    );
   }, [call]);
   const fetchInfoboxes = useCallback(async () => {
     const fetchedInfoboxes = await call("get", getRoute("infoboxes"), {}, true);
-    setInfoboxes(fetchedInfoboxes.map((infobox) => infobox.information));
+    setInfoboxes(
+      fetchedInfoboxes !== null && fetchedInfoboxes !== undefined
+        ? fetchedInfoboxes.map((infobox) => infobox.information)
+        : []
+    );
   }, [call]);
 
   useEffect(() => {

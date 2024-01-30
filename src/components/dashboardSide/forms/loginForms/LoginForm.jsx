@@ -6,7 +6,7 @@ import Submit from "../components/Submit";
 import { useRouter } from "next/navigation";
 import { getRoute } from "@/api/apiRoutes";
 import { useForm } from "react-hook-form";
-import { getNavigation, navigation } from "@/app/dashboard/routes/navigation";
+import { navigation } from "@/app/dashboard/routes/navigation";
 import Error from "../components/Error";
 
 export default function LoginForm() {

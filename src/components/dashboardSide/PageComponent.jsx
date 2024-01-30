@@ -28,7 +28,7 @@ export default function PageComponent({
   const handleDelete = async (id) => {
     const data = { user: useUserStore.getState().user.email };
     const res = await call("delete", getRoute(form) + `/${id}`, data, true);
-    toast.success(res.message);
+    res !== null && res !== undefined ? toast.success(res.message) : null;
     fetchData();
   };
   const handleAddAndModify = async (data, isFile = false) => {
@@ -44,7 +44,7 @@ export default function PageComponent({
     } else {
       res = await call("post", getRoute(form), data, true, isFile);
     }
-    toast.success(res.message);
+    res !== null && res !== undefined ? toast.success(res.message) : null;
     setPopUp({ ...popUp, isOpen: false });
     fetchData();
   };

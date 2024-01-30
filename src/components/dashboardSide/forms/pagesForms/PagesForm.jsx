@@ -41,11 +41,19 @@ export default function PagesForm({ item, handleAddAndModify }) {
       fetchedPages = await call("get", getRoute("pages"), {}, true);
     }
     const fetchedPagesNames = fetchedPages.map((page) => page.name);
-    setParentPages(["", ...fetchedPagesNames]);
+    setParentPages(
+      fetchedPagesNames !== null && fetchedPagesNames !== undefined
+        ? ["", ...fetchedPagesNames]
+        : [""]
+    );
   }, [call, item]);
   const fetchPageSections = useCallback(async () => {
     const fetchedSections = await call("get", getRoute("sections"), {}, true);
-    setPageSections(fetchedSections.map((section) => section.title));
+    setPageSections(
+      fetchedSections !== null && fetchedSections !== undefined
+        ? fetchedSections.map((section) => section.title)
+        : []
+    );
   }, [call]);
   useEffect(() => {
     fetchParentPage();
