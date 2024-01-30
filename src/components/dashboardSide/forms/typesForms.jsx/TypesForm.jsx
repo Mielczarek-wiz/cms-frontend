@@ -7,24 +7,18 @@ import Error from "../components/Error";
 import { useUserStore } from "@/zustand/useUserStore";
 
 export default function TypesForm({ item, handleAddAndModify }) {
-  let defaultValues = {};
-  if (item !== null) {
-    defaultValues = {
-      type: item.type.toString(),
-      hidden: item.hidden.toString(),
-    };
-  } else {
-    defaultValues = {
-      type: "",
-      hidden: "true",
-    };
-  }
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: defaultValues });
-  const onSubmit = async (data) => handleAddAndModify({...data, user: useUserStore.getState().user.email});
+  } = useForm({
+    defaultValues: {
+      type: item ? item.type.toString() : "",
+      hidden: item ? item.hidden.toString() : "true",
+    },
+  });
+  const onSubmit = async (data) =>
+    handleAddAndModify({ ...data, user: useUserStore.getState().user.email });
   return (
     <div className="space-y-4 h-fit w-fit">
       {item !== null ? (

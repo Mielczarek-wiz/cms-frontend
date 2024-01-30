@@ -6,34 +6,31 @@ import Radio from "../components/Radio";
 import Submit from "../components/Submit";
 import Error from "../components/Error";
 import { useUserStore } from "@/zustand/useUserStore";
+import Textarea from "../components/Textarea";
 
 export default function InfoboxesForm({ item, handleAddAndModify }) {
-  let defaultValues = {};
-  if (item !== null) {
-    defaultValues = {
-      information: item.information,
-      subinformation: item.subinformation,
-      hidden: item.hidden.toString(),
-    };
-  } else {
-    defaultValues = {
-      information: "",
-      subinformation: "",
-      hidden: "true",
-    };
-  }
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: defaultValues });
+  } = useForm({
+    defaultValues: {
+      information: item ? item.information : "",
+      subinformation: item ? item.subinformation : "",
+      hidden: item ? item.hidden.toString() : "true",
+    },
+  });
   const onSubmit = async (data) => {
-    const formData = new FormData()
-    formData.append("icon", data.icon[0])
-    data = {...data, icon: data.icon[0].name, user: useUserStore.getState().user.email}
-    formData.append("infobox", JSON.stringify(data))
+    const formData = new FormData();
+    formData.append("icon", data.icon[0]);
+    data = {
+      ...data,
+      icon: data.icon[0].name,
+      user: useUserStore.getState().user.email,
+    };
+    formData.append("infobox", JSON.stringify(data));
     handleAddAndModify(formData, true);
-  }
+  };
 
   return (
     <div className="space-y-4 h-fit w-fit">
@@ -53,7 +50,7 @@ export default function InfoboxesForm({ item, handleAddAndModify }) {
           required={"Information is required"}
         />
         {errors.information && <Error message={errors.information.message} />}
-        <Input
+        <Textarea
           label={"subinformation"}
           register={register}
           required={"Subinformation is required"}

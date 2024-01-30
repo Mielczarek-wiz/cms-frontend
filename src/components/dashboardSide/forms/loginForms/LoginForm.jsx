@@ -6,7 +6,7 @@ import Submit from "../components/Submit";
 import { useRouter } from "next/navigation";
 import { getRoute } from "@/api/apiRoutes";
 import { useForm } from "react-hook-form";
-import { getNavigation, navigation } from "@/app/dashboard/routes/navigation";
+import { navigation } from "@/app/dashboard/routes/navigation";
 import Error from "../components/Error";
 
 export default function LoginForm() {
@@ -20,12 +20,8 @@ export default function LoginForm() {
     });
 
     login(res);
-    if (typeof window !== "undefined" && window.localStorage) {
-      router.push(getNavigation(localStorage.getItem("current")).href);
-    } else {
-      localStorage.setItem("current", navigation[0].name);
-      router.push(navigation[0].href);
-    }
+    localStorage.setItem("current", navigation[0].name);
+    router.push(navigation[0].href);
   };
 
   const {

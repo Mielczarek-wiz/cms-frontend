@@ -1,3 +1,1 @@
-export const userNavigation = [
-    { name: 'Your Profile', href: '#' },
-  ]
+export const userNavigation = [];

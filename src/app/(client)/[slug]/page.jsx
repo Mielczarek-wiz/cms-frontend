@@ -11,11 +11,13 @@ import PopularPropertiesSection from "@/components/clientSide/sections/popularPr
 import TestimonialsSection from "@/components/clientSide/sections/testimonials/TestimonialsSection";
 import WhoWeAreSection from "@/components/clientSide/sections/whoWeAre/WhoWeAreSection";
 import WhyPeopleChooseUsSection from "@/components/clientSide/sections/whyPeopleChooseUs/WhyPeopleChooseUsSection";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 export default function Page({ params }) {
   const { call } = useCall();
   const [sections, setSections] = useState([]);
+  const router = useRouter();
 
   const fetchPage = useCallback(async () => {
     const page = await call(
@@ -25,8 +27,13 @@ export default function Page({ params }) {
       false,
       false
     );
+    if (!page || page.id === -1) {
+      router.push("/home");
+      return;
+    }
+
     setSections(page.sections);
-  }, [call, params.slug]);
+  }, [call, params.slug, router]);
   useEffect(() => {
     fetchPage();
   }, [fetchPage]);

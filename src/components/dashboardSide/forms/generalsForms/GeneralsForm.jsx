@@ -5,33 +5,25 @@ import Radio from "../components/Radio";
 import Submit from "../components/Submit";
 import Error from "../components/Error";
 import { useUserStore } from "@/zustand/useUserStore";
+import Textarea from "../components/Textarea";
 
 export default function GeneralsForm({ item, handleAddAndModify }) {
-  let defaultValues = {};
-  if (item !== null) {
-    defaultValues = {
-      key: item.key,
-      value: item.value,
-      description: item.description,
-      hidden: item.hidden.toString(),
-    };
-  } else {
-    defaultValues = {
-      key: "",
-      value: "",
-      description: "",
-      hidden: "true",
-    };
-  }
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: defaultValues });
+  } = useForm({
+    defaultValues: {
+      key: item ? item.key : "",
+      value: item ? item.value : "",
+      description: item ? item.description : "",
+      hidden: item ? item.hidden.toString() : "true",
+    },
+  });
   const onSubmit = async (data) => {
-    const newData = {...data, user: useUserStore.getState().user.email}
+    const newData = { ...data, user: useUserStore.getState().user.email };
     handleAddAndModify(newData);
-  }
+  };
   return (
     <div className="space-y-4 h-fit w-fit">
       {item !== null ? (
@@ -53,8 +45,7 @@ export default function GeneralsForm({ item, handleAddAndModify }) {
           required={"Value is required"}
         />
         {errors.value && <Error message={errors.value.message} />}
-
-        <Input
+        <Textarea
           label={"description"}
           register={register}
           required={"Description is required"}

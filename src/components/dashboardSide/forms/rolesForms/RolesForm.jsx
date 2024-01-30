@@ -7,24 +7,18 @@ import Error from "../components/Error";
 import { useUserStore } from "@/zustand/useUserStore";
 
 export default function RolesForm({ item, handleAddAndModify }) {
-  let defaultValues = {};
-  if (item !== null) {
-    defaultValues = {
-      name: item.name,
-      hidden: item.hidden.toString(),
-    };
-  } else {
-    defaultValues = {
-      name: "",
-      hidden: "true",
-    };
-  }
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ defaultValues: defaultValues });
-  const onSubmit = async (data) => handleAddAndModify({...data, user: useUserStore.getState().user.email});
+  } = useForm({
+    defaultValues: {
+      name: item ? item.name : "",
+      hidden: item ? item.hidden.toString() : "true",
+    },
+  });
+  const onSubmit = async (data) =>
+    handleAddAndModify({ ...data, user: useUserStore.getState().user.email });
 
   return (
     <div className="space-y-4 h-fit w-fit">
