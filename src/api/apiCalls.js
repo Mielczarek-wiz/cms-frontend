@@ -1,6 +1,6 @@
 "use client";
 import ky from "ky";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { mainUrl } from "./apiRoutes";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/zustand/useUserStore";
@@ -8,6 +8,13 @@ import { toast } from "react-toastify";
 
 export const useCall = () => {
   const router = useRouter();
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (error) {
+      handleError(error.status, error.message, router);
+    }
+  }, [error, router]);
 
   const call = useCallback(
     async (
@@ -47,11 +54,13 @@ export const useCall = () => {
 
         return data;
       } catch (error) {
-        const message = await error.response?.json();
-        handleError(error.response?.status, message, router);
+        const status = error.response.status;
+        const message = await error.response.json();
+        setError({ status: status, message: message });
+        return null;
       }
     },
-    [router]
+    []
   );
 
   return { call };
